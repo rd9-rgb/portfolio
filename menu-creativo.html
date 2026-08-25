@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Al Dente — Menu Creativo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --paper: #F7F5F0;
+            --ink: #1A1A1A;
+            --olive: #5B6236;
+            --olive-light: #7A8250;
+            --terracotta: #C4704B;
+            --cream: #EDE8DF;
+            --stone: #C4BDB0;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: #e5e1d8;
+            color: var(--ink);
+            padding: 2rem 1rem;
+            line-height: 1.5;
+        }
+
+        .menu-page {
+            width: 210mm;
+            max-width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            background: var(--paper);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+        }
+
+        /* === DECORATIVE GRAPHICS === */
+        .deco-circle {
+            position: absolute;
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .c1 {
+            width: 300px; height: 300px;
+            background: var(--cream);
+            top: -80px; right: -80px;
+            opacity: 0.6;
+        }
+
+        .c2 {
+            width: 180px; height: 180px;
+            border: 2px solid var(--stone);
+            bottom: 120px; left: -60px;
+            opacity: 0.4;
+        }
+
+        .c3 {
+            width: 60px; height: 60px;
+            background: var(--terracotta);
+            top: 200px; right: 60px;
+            opacity: 0.15;
+        }
+
+        .deco-line {
+            position: absolute;
+            z-index: 0;
+        }
+
+        .line-1 {
+            width: 1px; height: 400px;
+            background: linear-gradient(to bottom, transparent, var(--stone), transparent);
+            left: 50%; top: 100px;
+        }
+
+        .line-2 {
+            width: 120px; height: 1px;
+            background: var(--terracotta);
+            top: 85px; left: 50%;
+            transform: translateX(-50%);
+            opacity: 0.6;
+        }
+
+        .leaf {
+            position: absolute;
+            width: 40px; height: 40px;
+            background: var(--olive);
+            border-radius: 0 50% 0 50%;
+            opacity: 0.1;
+            transform: rotate(-45deg);
+        }
+
+        .leaf-1 { top: 400px; left: 40px; }
+        .leaf-2 { bottom: 300px; right: 50px; transform: rotate(135deg); }
+
+        .pizza-slice {
+            position: absolute;
+            width: 0; height: 0;
+            border-left: 25px solid transparent;
+            border-right: 25px solid transparent;
+            border-top: 45px solid var(--terracotta);
+            opacity: 0.08;
+            top: 680px; right: 80px;
+            transform: rotate(15deg);
+        }
+
+        /* === HEADER === */
+        .menu-header {
+            position: relative;
+            z-index: 1;
+            padding: 50px 50px 30px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: end;
+            gap: 2rem;
+            border-bottom: 1px solid var(--stone);
+            margin: 0 50px;
+        }
+
+        .header-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2rem;
+            font-weight: 700;
+            color: var(--ink);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        .header-text .sub {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--olive);
+            font-weight: 600;
+        }
+
+        .header-meta {
+            text-align: right;
+            font-size: 0.8rem;
+            color: var(--stone);
+            line-height: 1.8;
+        }
+
+        .header-meta strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+
+        /* === GRID LAYOUT === */
+        .menu-body {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            padding: 30px 50px 50px;
+        }
+
+        .col {
+            padding: 0 20px;
+        }
+
+        .col:first-child {
+            border-right: 1px solid var(--cream);
+        }
+
+        /* === SECTION STYLING === */
+        .section {
+            margin-bottom: 2.5rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--olive);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, var(--stone), transparent);
+        }
+
+        .item {
+            margin-bottom: 1.3rem;
+            position: relative;
+            padding-left: 0;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .item-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        .item-price {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--terracotta);
+            white-space: nowrap;
+        }
+
+        .item-desc {
+            font-size: 0.8rem;
+            color: var(--stone);
+            font-weight: 400;
+            line-height: 1.4;
+            max-width: 90%;
+        }
+
+        .item-tag {
+            display: inline-block;
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-top: 0.4rem;
+            font-weight: 700;
+        }
+
+        .tag-veg {
+            background: #E8F5E9;
+            color: #2E7D32;
+        }
+
+        .tag-spicy {
+            background: #FFF3E0;
+            color: #E65100;
+        }
+
+        .tag-chef {
+            background: var(--ink);
+            color: var(--paper);
+        }
+
+        /* === PIZZA SECTION (SPECIAL) === */
+        .pizza-section {
+            grid-column: 1 / -1;
+            margin-bottom: 2.5rem;
+            padding-top: 1rem;
+        }
+
+        .pizza-section .section-title {
+            color: var(--olive);
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .pizza-section .section-title::after {
+            background: linear-gradient(to right, var(--stone), transparent);
+        }
+
+        .pizza-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.3rem 3rem;
+        }
+
+        .pizza-item {
+            margin-bottom: 1.3rem;
+        }
+
+        .pizza-item .item-name {
+            color: var(--ink);
+            font-size: 1.15rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        .pizza-item .item-price {
+            color: var(--terracotta);
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .pizza-item .item-desc {
+            color: var(--stone);
+            font-size: 0.8rem;
+        }
+
+        /* === FOOTER === */
+
+        .print-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 1rem 2.5rem;
+            background: var(--ink);
+            color: var(--paper);
+            border: none;
+            border-radius: 50px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 1000;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .print-btn:hover {
+            background: var(--terracotta);
+        }
+
+        /* === PRINT === */
+        /* === NEW FOOTER === */
+        .menu-footer {
+            margin: 0 50px;
+            padding: 30px 0;
+            border-top: 1px solid var(--stone);
+            overflow: hidden;
+        }
+
+        .footer-left {
+            float: left;
+            width: 75%;
+            font-size: 0.85rem;
+            color: var(--stone);
+            line-height: 1.6;
+        }
+
+        .footer-left strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+
+        .footer-right {
+            float: right;
+            width: 20%;
+            text-align: right;
+        }
+
+        .qr-box {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .qr-placeholder {
+            width: 70px;
+            height: 70px;
+            border: 2px dashed var(--stone);
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.65rem;
+            color: var(--stone);
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .qr-box span {
+            font-size: 0.8rem;
+            color: var(--stone);
+            white-space: nowrap;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .menu-page {
+                box-shadow: none;
+                width: 100%;
+            }
+            .print-btn {
+                display: none;
+            }
+            .deco-circle, .leaf, .pizza-slice {
+                opacity: 0.06 !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-body {
+                grid-template-columns: 1fr;
+            }
+            .col:first-child {
+                border-right: none;
+                border-bottom: 1px solid var(--cream);
+                padding-bottom: 2rem;
+                margin-bottom: 2rem;
+            }
+            .pizza-grid {
+                grid-template-columns: 1fr;
+            }
+            .menu-header {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .header-meta {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="menu-page">
+        <!-- Decorative Graphics -->
+        <div class="deco-circle c1"></div>
+        <div class="deco-circle c2"></div>
+        <div class="deco-circle c3"></div>
+        <div class="deco-line line-1"></div>
+        <div class="deco-line line-2"></div>
+        <div class="leaf leaf-1"></div>
+        <div class="leaf leaf-2"></div>
+        <div class="pizza-slice"></div>
+
+        <!-- Header -->
+        <div class="menu-header">
+            <div class="header-text">
+                <div class="sub">Ristorante Tradizionale</div>
+                <h1>Al Dente</h1>
+            </div>
+            <div class="header-meta">
+                <strong>Via Roma 42, Roma</strong><br>
+                +39 06 123 4567<br>
+                Lun–Dom 19:30–23:30
+            </div>
+        </div>
+
+        <!-- Body -->
+        <div class="menu-body">
+            <div class="col">
+                <div class="section">
+                    <div class="section-title">Antipasti</div>
+                    <div class="item">
+                        <div class="item-header">
+                            <span class="item-name">Tagliere di Salumi e Formaggi</span>
+                            <span class="item-price">€16</span>
+                        </div>
+                        <div class="item-desc">Prosciutto crudo di Parma, pecorino toscano stagionato, miele locale e crostini artigianali.</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header">
+                            <span class="item-name">Bruschetta al Pomodoro</span>
+                            <span class="item-price">€8</span>
+                        </div>
+                        <div class="item-desc">Pane casereccio tostato, pomodori freschi del nostro orto, basilico e olio evo.</div>
+                        <span class="item-tag tag-veg">Vegetariano</span>
+                    </div>
+                    <div class="item">
+                        <div class="item-header">
+                            <span class="item-name">Carpaccio di Manzo</span>
+                            <span class="item-price">€14</span>
+                        </div>
+                        <div class="item-desc">Fassona piemontese, rucola fresca, scaglie di parmigiano 36 mesi, olio al tartufo.</div>
+                        <span class="item-tag tag-chef">Chef</span>
+                    </div>
+                    <div class="item">
+                        <div class="item-header">
+                            <span class="item-name">Burrata e Prosciutto</span>
+                            <span class="item-price">€15</span>
+                        </div>
+                        <div class="item-desc">Burrata pugliese del giorno, crudo di Parma 24 mesi, pomodorini confit.</div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">Primi Piatti</div>
+                    <div class="item">
+                        <div class="item-header">
+                            <span class="item-name">Risotto allo Zafferano</span>
+                            <span class="item-price">€18</span>
+                        </div>
+                        <div class="item-desc">Carnaroli mantecato al momento, zafferano di Cascia, midollo di bue, croccante di parmigiano.</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header">
+                            <span class="item-name">Tagliatelle al Ragù</span>
+                            <span class="item-price">€14</span>
+                        </div>
+                        <div class="item-desc">Pasta fresca fatta in casa ogni mattina, ragù di manzo brasato 6 ore.</div>
+                        <span class="item-tag tag-chef">Della Casa</span>
+                    </div>
+                    <div class="item">
+                        <div class="item-header">
+                            <span class="item-name">Gnocchi alla Sorrentina</span>
+                            <span class="item-price">€13</span>
+                        </div>
+                        <div class="item-desc">Pomodoro San Marzano, mozzarella di bufala campana, basilico fresco.</div>
+                        <span class="item-tag tag-veg">Vegetariano</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="section">
+                    <div class="section-title">Secondi</div>
+                    <div class="item">
+                        <div class="item-header">
+                            <span class="item-name">Filetto di Branzino</span>
+                            <span class="item-price">€22</span>
+                        </div>
+                        <div class="item-desc">Cotto al vapore con erbe aromatiche, crema di patate al limone, verdure di stagione.</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header">
+                            <span class="item-name">Bistecca alla Fiorentina</span>
+                            <span class="item-price">€32</span>
+                        </div>
+                        <div class="item-desc">Chianina IGP da 800g, cotta sulla brace di legna di rovere, servita con fagioli all'olio.</div>
+                        <span class="item-tag tag-chef">Chef</span>
+                    </div>
+                    <div class="item">
+                        <div class="item-header">
+                            <span class="item-name">Ossobuco alla Milanese</span>
+                            <span class="item-price">€24</span>
+                        </div>
+                        <div class="item-desc">Risotto allo zafferano, gremolata fresca, riduzione di vino rosso.</div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">Dolci</div>
+                    <div class="item">
+                        <div class="item-header">
+                            <span class="item-name">Tiramisù della Casa</span>
+                            <span class="item-price">€8</span>
+                        </div>
+                        <div class="item-desc">La ricetta segreta della nonna Luisa. Savoiardi, mascarpone fresco, cacao amaro.</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header">
+                            <span class="item-name">Panna Cotta ai Frutti di Bosco</span>
+                            <span class="item-price">€7</span>
+                        </div>
+                        <div class="item-desc">Composta fresca di more e lamponi, menta del nostro giardino.</div>
+                        <span class="item-tag tag-veg">Vegetariano</span>
+                    </div>
+                    <div class="item">
+                        <div class="item-header">
+                            <span class="item-name">Torta della Nonna</span>
+                            <span class="item-price">€7</span>
+                        </div>
+                        <div class="item-desc">Crema pasticcera fatta in casa, pinoli tostati, base frolla friabile.</div>
+                    </div>
+                </div>
+                        </div>
+
+            <!-- PIZZA SECTION -->
+            <div class="pizza-section">
+            <div class="pizza-deco"></div>
+            <div class="pizza-deco-2"></div>
+            <div class="section-title">La Nostra Pizza</div>
+            <div class="pizza-grid">
+                <div class="pizza-item item">
+                    <div class="item-header">
+                        <span class="item-name">Margherita DOP</span>
+                        <span class="item-price">€9</span>
+                    </div>
+                    <div class="item-desc">Pomodoro San Marzano, mozzarella di bufala, basilico, olio evo.</div>
+                    <span class="item-tag tag-veg">Classica</span>
+                </div>
+                <div class="pizza-item item">
+                    <div class="item-header">
+                        <span class="item-name">Diavola</span>
+                        <span class="item-price">€11</span>
+                    </div>
+                    <div class="item-desc">Pomodoro, mozzarella, salame piccante, olive nere, peperoncino fresco.</div>
+                    <span class="item-tag tag-spicy">Piccante</span>
+                </div>
+                <div class="pizza-item item">
+                    <div class="item-header">
+                        <span class="item-name">Quattro Stagioni</span>
+                        <span class="item-price">€12</span>
+                    </div>
+                    <div class="item-desc">Pomodoro, mozzarella, prosciutto, funghi, carciofi, olive.</div>
+                </div>
+                <div class="pizza-item item">
+                    <div class="item-header">
+                        <span class="item-name">Truffle & Burrata</span>
+                        <span class="item-price">€14</span>
+                    </div>
+                    <div class="item-desc">Crema di tartufo nero, burrata pugliese, rucola, scaglie di parmigiano.</div>
+                    <span class="item-tag tag-chef">Speciale</span>
+                </div>
+                <div class="pizza-item item">
+                    <div class="item-header">
+                        <span class="item-name">Capricciosa</span>
+                        <span class="item-price">€12</span>
+                    </div>
+                    <div class="item-desc">Pomodoro, mozzarella, prosciutto cotto, funghi, carciofi, olive.</div>
+                </div>
+                <div class="pizza-item item">
+                    <div class="item-header">
+                        <span class="item-name">Marinara</span>
+                        <span class="item-price">€7</span>
+                    </div>
+                    <div class="item-desc">Pomodoro, aglio, origano, olio evo. La regina della semplicità.</div>
+                    <span class="item-tag tag-veg">Vegana</span>
+                </div>
+            </div>
+        </div>
+    </div>  
+        <!-- Footer -->
+    <div class="menu-footer">
+        <div class="footer-left">
+            <strong>Coperto €2,50</strong> · Serviamo prodotti freschi e stagionali · Per allergie, chiedere al personale
+        </div>
+        <div class="footer-right">
+            <div class="qr-box">
+                <div class="qr-placeholder">QR CODE</div>
+                <span>Menu digitale</span>
+            </div>
+        </div>
+    </div>
+
+    <button class="print-btn" onclick="window.print()">🖨️ Stampa / Salva PDF</button>
+
+</body>
+</html>

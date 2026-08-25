@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iron Lab – Palestra e Personal Training a Roma</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --dark: #111111;
+            --gray: #1a1a1a;
+            --neon: #ccff00;
+            --neon-dim: #b3e600;
+            --white: #ffffff;
+            --muted: #888888;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 1px; }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: var(--white);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .logo span { color: var(--neon); }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--muted);
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--neon); }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .hamburger span {
+            width: 28px; height: 2px;
+            background: var(--white);
+            transition: 0.3s;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(rgba(10,10,10,0.7), rgba(10,10,10,0.9)),
+                        url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1920&q=80') center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 8rem 5% 4rem;
+            position: relative;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border: 1px solid var(--neon);
+            color: var(--neon);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 2rem;
+            border-radius: 50px;
+        }
+
+        .hero h1 {
+            font-size: clamp(3.5rem, 10vw, 7rem);
+            line-height: 0.95;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .hero h1 span { color: var(--neon); }
+
+        .hero p {
+            color: var(--muted);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: var(--neon);
+            color: var(--black);
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+            border: 2px solid var(--neon);
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: var(--neon);
+            box-shadow: 0 0 30px rgba(204,255,0,0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--neon);
+            margin-left: 1rem;
+            border-color: rgba(204,255,0,0.4);
+        }
+
+        .btn-outline:hover {
+            background: var(--neon);
+            color: var(--black);
+            box-shadow: 0 0 30px rgba(204,255,0,0.3);
+        }
+
+        /* Sections */
+        section { padding: 6rem 5%; max-width: 1200px; margin: 0 auto; }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .section-header h2 span { color: var(--neon); }
+
+        .section-header p {
+            color: var(--muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            background: var(--dark);
+            padding: 4rem 5%;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .stats-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat h3 {
+            font-size: 3rem;
+            color: var(--neon);
+            font-family: 'Bebas Neue', sans-serif;
+        }
+
+        .stat p {
+            color: var(--muted);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        /* Programs */
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .program-card {
+            background: var(--gray);
+            padding: 3rem 2rem;
+            border-radius: 4px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .program-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 3px;
+            background: var(--neon);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .program-card:hover::before { transform: scaleX(1); }
+        .program-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(204,255,0,0.2);
+        }
+
+        .program-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .program-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .program-card p {
+            color: var(--muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .program-link {
+            color: var(--neon);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* About */
+        .about-section { background: var(--dark); }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 5%;
+        }
+
+        .about-img {
+            position: relative;
+        }
+
+        .about-img img {
+            width: 100%;
+            border-radius: 4px;
+            filter: grayscale(30%) contrast(1.1);
+        }
+
+        .about-img::after {
+            content: '';
+            position: absolute;
+            top: 20px; left: 20px;
+            width: 100%; height: 100%;
+            border: 2px solid var(--neon);
+            border-radius: 4px;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        .about-text h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .about-text h2 span { color: var(--neon); }
+
+        .about-text p {
+            color: var(--muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-features {
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-weight: 600;
+            color: var(--white);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .feature::before {
+            content: '▸';
+            color: var(--neon);
+            font-size: 1.2rem;
+        }
+
+        /* Pricing */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .pricing-card {
+            background: var(--gray);
+            padding: 3rem 2rem;
+            border-radius: 4px;
+            border: 1px solid rgba(255,255,255,0.05);
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .pricing-card.featured {
+            border: 2px solid var(--neon);
+            position: relative;
+        }
+
+        .pricing-card.featured::before {
+            content: 'PIÈ POPOLARE';
+            position: absolute;
+            top: -12px; left: 50%;
+            transform: translateX(-50%);
+            background: var(--neon);
+            color: var(--black);
+            padding: 0.3rem 1rem;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .price {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--white);
+            margin: 1.5rem 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .price span {
+            font-size: 1rem;
+            color: var(--muted);
+            font-weight: 400;
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .pricing-card ul li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            color: var(--muted);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .pricing-card ul li::before {
+            content: '✓';
+            color: var(--neon);
+            font-weight: 700;
+        }
+
+        .pricing-card .btn {
+            width: 100%;
+            margin: 0;
+        }
+
+        /* Testimonials */
+        .testimonials-section { background: var(--dark); }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial {
+            background: var(--gray);
+            padding: 2.5rem;
+            border-radius: 4px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .testimonial-stars {
+            color: var(--neon);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .testimonial p {
+            color: var(--muted);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .testimonial-author img {
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--neon);
+        }
+
+        .testimonial-author strong {
+            display: block;
+            color: var(--white);
+            font-size: 0.95rem;
+        }
+
+        .testimonial-author span {
+            color: var(--muted);
+            font-size: 0.8rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(rgba(10,10,10,0.9), rgba(10,10,10,0.9)),
+                        url('https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=1920&q=80') center/cover;
+            text-align: center;
+            padding: 8rem 5%;
+            background-attachment: fixed;
+        }
+
+        .cta-section h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .cta-section h2 span { color: var(--neon); }
+
+        .cta-section p {
+            color: var(--muted);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--black);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .footer-info {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-info div strong {
+            display: block;
+            color: var(--neon);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.3rem;
+        }
+
+        .footer-info div {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            color: var(--muted);
+            font-size: 0.8rem;
+            margin-top: 2rem;
+            opacity: 0.5;
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px; right: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: var(--black);
+                flex-direction: column;
+                align-items: center;
+                padding-top: 3rem;
+                transition: right 0.3s;
+            }
+
+            .nav-links.active { right: 0; }
+
+            .hamburger { display: flex; }
+
+            .hero { padding-top: 100px; }
+
+            .btn-outline { margin-left: 0; margin-top: 1rem; }
+
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+
+            .about-grid { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 5%; }
+
+            .about-img::after { display: none; }
+
+            section { padding: 4rem 5%; }
+
+            .cta-section h2 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo">Iron <span>Lab</span></a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#programmi">Programmi</a></li>
+            <li><a href="#chi-siamo">Chi Siamo</a></li>
+            <li><a href="#prezzi">Prezzi</a></li>
+            <li><a href="#contatti">Contatti</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-tag">Palestra e Personal Training</div>
+        <h1>Trasforma il Tuo <span>Corpo</span></h1>
+        <p>Allenamenti personalizzati, attrezzatura professionale e un team di esperti pronti a spingerti oltre i tuoi limiti. La tua trasformazione inizia oggi.</p>
+        <div>
+            <a href="#contatti" class="btn">Prova Gratuita</a>
+            <a href="#programmi" class="btn btn-outline">Scopri i Programmi</a>
+        </div>
+    </section>
+
+    <div class="stats-bar">
+        <div class="stats-grid">
+            <div class="stat">
+                <h3>500+</h3>
+                <p>Atleti Soddisfatti</p>
+            </div>
+            <div class="stat">
+                <h3>8</h3>
+                <p>Anni di Esperienza</p>
+            </div>
+            <div class="stat">
+                <h3>15</h3>
+                <p>Trainer Certificati</p>
+            </div>
+            <div class="stat">
+                <h3>24/7</h3>
+                <p>Apertura H24</p>
+            </div>
+        </div>
+    </div>
+
+    <section id="programmi">
+        <div class="section-header">
+            <h2>I Nostri <span>Programmi</span></h2>
+            <p>Scegli il percorso più adatto ai tuoi obiettivi. Dal principiante all'atleta avanzato.</p>
+        </div>
+        <div class="programs-grid">
+            <div class="program-card">
+                <div class="program-icon">💪</div>
+                <h3>Personal Training</h3>
+                <p>Schede personalizzate one-to-one con i nostri trainer certificati. Monitoraggio costante dei progressi e adattamento del programma.</p>
+                <a href="#contatti" class="program-link">Scopri di più →</a>
+            </div>
+            <div class="program-card">
+                <div class="program-icon">🔥</div>
+                <h3>Functional Training</h3>
+                <p>Allenamento funzionale ad alta intensità per migliorare forza, resistenza e mobilità. Lezioni di gruppo energizzanti.</p>
+                <a href="#contatti" class="program-link">Scopri di più →</a>
+            </div>
+            <div class="program-card">
+                <div class="program-icon">🥗</div>
+                <h3>Nutrizione Sportiva</h3>
+                <p>Piani alimentari su misura creati dal nostro nutrizionista. Integrazione, dieta e consulenza per massimizzare i risultati.</p>
+                <a href="#contatti" class="program-link">Scopri di più →</a>
+            </div>
+            <div class="program-card">
+                <div class="program-icon">🧘</div>
+                <h3>Yoga & Mobility</h3>
+                <p>Recupero, flessibilità e consapevolezza corporea. Lezioni di yoga, stretching e mobility per prevenire infortuni.</p>
+                <a href="#contatti" class="program-link">Scopri di più →</a>
+            </div>
+            <div class="program-card">
+                <div class="program-icon">🏋️</div>
+                <h3>Powerlifting</h3>
+                <p>Area dedicata con bilancieri, piatti competition e piattaforme. Ideale per chi vuole spingere sul massimale.</p>
+                <a href="#contatti" class="program-link">Scopri di più →</a>
+            </div>
+            <div class="program-card">
+                <div class="program-icon">⚡</div>
+                <h3>HIIT & Cardio</h3>
+                <p>Sessioni ad alta intensità per bruciare grasso e migliorare la resistenza cardiovascolare. Risultati visibili in poche settimane.</p>
+                <a href="#contatti" class="program-link">Scopri di più →</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section" id="chi-siamo">
+        <div class="about-grid">
+            <div class="about-img">
+                <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=800&q=80" alt="Trainer in palestra">
+            </div>
+            <div class="about-text">
+                <h2>Non è Solo una <span>Palestra</span></h2>
+                <p>Iron Lab nasce dalla convinzione che l'allenamento sia una scienza, non un'improvvisazione. Ogni membro del nostro staff è certificato ISSA, NASM o ACE.</p>
+                <p>La nostra struttura di 800mq è equipaggiata con macchinari Technogym, Rogue Fitness e Hammer Strength. Nessuna attesa, nessuna scusa.</p>
+                <p>Qui non trovi giudizi. Trovi una tribù di persone che, come te, vogliono diventare la versione migliore di sé stessi.</p>
+                <div class="about-features">
+                    <div class="feature">Attrezzatura Professionale</div>
+                    <div class="feature">Spogliatoi con Sauna</div>
+                    <div class="feature">Parcheggio Gratuito</div>
+                    <div class="feature">WiFi e Aria Condizionata</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="prezzi">
+        <div class="section-header">
+            <h2>Scegli il Tuo <span>Piano</span></h2>
+            <p>Nessun vincolo, nessuna sorpresa. Scegli ciò che fa per te.</p>
+        </div>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3>Base</h3>
+                <div class="price">€39<span>/mese</span></div>
+                <ul>
+                    <li>Accesso sala pesi H24</li>
+                    <li>Spogliatoi e sauna</li>
+                    <li>WiFi gratuito</li>
+                    <li>1 consulenza mensile</li>
+                </ul>
+                <a href="#contatti" class="btn">Inizia Ora</a>
+            </div>
+            <div class="pricing-card featured">
+                <h3>Pro</h3>
+                <div class="price">€69<span>/mese</span></div>
+                <ul>
+                    <li>Tutto del piano Base</li>
+                    <li>4 sessioni personal training</li>
+                    <li>Accesso classi di gruppo</li>
+                    <li>Piano nutrizionale base</li>
+                    <li>Parcheggio riservato</li>
+                </ul>
+                <a href="#contatti" class="btn">Inizia Ora</a>
+            </div>
+            <div class="pricing-card">
+                <h3>Elite</h3>
+                <div class="price">€99<span>/mese</span></div>
+                <ul>
+                    <li>Tutto del piano Pro</li>
+                    <li>Personal training illimitato</li>
+                    <li>Nutrizionista dedicato</li>
+                    <li>Recupero e mobility</li>
+                    <li>Accesso VIP area</li>
+                </ul>
+                <a href="#contatti" class="btn">Inizia Ora</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials-section">
+        <div class="section-header">
+            <h2>Cosa Dicono i <span>Nostri Atleti</span></h2>
+            <p>Risultati reali, persone reali.</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial">
+                <div class="testimonial-stars">★★★★★</div>
+                <p>"In 6 mesi ho perso 18kg e ho trovato una seconda famiglia. I trainer non ti lasciano mai da solo, anche nei giorni più difficili."</p>
+                <div class="testimonial-author">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80" alt="Marco">
+                    <div>
+                        <strong>Marco Bianchi</strong>
+                        <span>Membro da 2 anni</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial">
+                <div class="testimonial-stars">★★★★★</div>
+                <p>"Dopo anni di palestre commerciali, qui ho finalmente trovato serietà. Attrezzatura top, nessuna coda e un'atmosfera che spinge a dare il massimo."</p>
+                <div class="testimonial-author">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80" alt="Giulia">
+                    <div>
+                        <strong>Giulia Rossi</strong>
+                        <span>Membro da 1 anno</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial">
+                <div class="testimonial-stars">★★★★★</div>
+                <p>"Il piano nutrizionale mi ha cambiato la vita. Non solo ho aumentato la massa muscolare, ma ho imparato a mangiare senza privazioni."</p>
+                <div class="testimonial-author">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&q=80" alt="Andrea">
+                    <div>
+                        <strong>Andrea Verdi</strong>
+                        <span>Membro da 8 mesi</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section" id="contatti">
+        <h2>La Tua Trasformazione <span>Inizia Oggi</span></h2>
+        <p>Prima lezione e consulenza fitness completamente gratuite. Nessun impegno, nessuna scusa.</p>
+        <a href="#" class="btn" onclick="event.preventDefault(); alert('Grazie! Ti contatteremo entro 24 ore per fissare la tua prova gratuita.');">Prenota la Prova Gratuita</a>
+    </section>
+
+    <footer>
+        <div class="footer-info">
+            <div>
+                <strong>Indirizzo</strong>
+                Via dello Sport 88, 00100 Roma
+            </div>
+            <div>
+                <strong>Telefono</strong>
+                +39 06 987 6543
+            </div>
+            <div>
+                <strong>Email</strong>
+                info@ironlab.it
+            </div>
+            <div>
+                <strong>Orari</strong>
+                H24 – 7 giorni su 7
+            </div>
+        </div>
+        <p>© 2026 Iron Lab. Sito dimostrativo per portfolio.</p>
+    </footer>
+
+    <script>
+        // Mobile menu
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+
+</body>
+</html>

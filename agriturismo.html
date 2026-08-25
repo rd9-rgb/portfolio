@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agriturismo La Quercia – Soggiorno in Campagna Toscana</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #FAF7F2;
+            --warm-white: #F5F0E8;
+            --terracotta: #C06C4F;
+            --terracotta-dark: #A85A40;
+            --sage: #7A8B6E;
+            --sage-dark: #5E6E54;
+            --charcoal: #3D3D3D;
+            --text: #5A5A5A;
+            --light-text: #8A8A8A;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background: var(--cream);
+            line-height: 1.7;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--charcoal);
+            font-weight: 600;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            background: rgba(250, 247, 242, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            text-decoration: none;
+            letter-spacing: 0.5px;
+        }
+
+        .logo span { color: var(--terracotta); font-style: italic; }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--charcoal);
+            font-weight: 500;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px; left: 0;
+            width: 0; height: 2px;
+            background: var(--terracotta);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after { width: 100%; }
+        .nav-links a:hover { color: var(--terracotta); }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .hamburger span {
+            width: 25px; height: 2px;
+            background: var(--charcoal);
+            transition: 0.3s;
+        }
+
+        /* Hero */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)),
+                        url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1920&q=80') center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.6rem 1.8rem;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 2rem;
+            border-radius: 50px;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            color: white;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            opacity: 0.95;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--terracotta);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            border: 2px solid var(--terracotta);
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: white;
+            border-color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border-color: rgba(255,255,255,0.6);
+            margin-left: 1rem;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--charcoal);
+            border-color: white;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            color: white;
+            font-size: 1.5rem;
+            opacity: 0.7;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* Sections */
+        section { padding: 6rem 5%; max-width: 1200px; margin: 0 auto; }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 2px;
+            background: var(--terracotta);
+            margin: 1rem auto 0;
+        }
+
+        .section-header p {
+            color: var(--light-text);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* About */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .about-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            position: relative;
+        }
+
+        .about-images img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .about-images img:first-child {
+            grid-column: span 2;
+            height: 350px;
+        }
+
+        .about-text h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .about-text h2 em { color: var(--terracotta); font-style: italic; }
+
+        .about-text p { margin-bottom: 1.2rem; }
+
+        .about-signature {
+            margin-top: 2rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--charcoal);
+            font-style: italic;
+        }
+
+        .about-signature span {
+            display: block;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            color: var(--light-text);
+            font-style: normal;
+            margin-top: 0.3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Rooms */
+        .rooms-section { background: var(--warm-white); border-radius: 30px; padding: 5rem; }
+
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .room-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+            transition: transform 0.3s;
+        }
+
+        .room-card:hover { transform: translateY(-8px); }
+
+        .room-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .room-content { padding: 2rem; }
+
+        .room-content h3 {
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .room-price {
+            color: var(--terracotta);
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .room-price span {
+            color: var(--light-text);
+            font-weight: 400;
+            font-size: 0.9rem;
+        }
+
+        .room-content p {
+            color: var(--light-text);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .room-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .room-features span {
+            background: var(--cream);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .room-card .btn {
+            width: 100%;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        /* Amenities */
+        .amenities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .amenity {
+            padding: 2rem;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+            transition: all 0.3s;
+        }
+
+        .amenity:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+        }
+
+        .amenity-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .amenity h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .amenity p {
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        /* Gallery */
+        .gallery-section { padding: 0; max-width: 100%; }
+
+        .gallery-header {
+            text-align: center;
+            padding: 6rem 5% 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.4s;
+            cursor: pointer;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+            z-index: 10;
+            position: relative;
+        }
+
+        /* Experience */
+        .experience-section {
+            background: linear-gradient(rgba(61,61,61,0.9), rgba(61,61,61,0.9)),
+                        url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1920&q=80') center/cover fixed;
+            color: white;
+            text-align: center;
+            padding: 8rem 5%;
+            max-width: 100%;
+        }
+
+        .experience-section h2 {
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .experience-section h2 em {
+            color: var(--terracotta);
+            font-style: italic;
+        }
+
+        .experience-section p {
+            color: rgba(255,255,255,0.8);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            font-size: 1.1rem;
+        }
+
+        .experience-section .btn {
+            background: white;
+            color: var(--charcoal);
+            border-color: white;
+        }
+
+        .experience-section .btn:hover {
+            background: transparent;
+            color: white;
+        }
+
+        /* Booking */
+        .booking-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .booking-info h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .booking-info > p {
+            color: var(--light-text);
+            margin-bottom: 2rem;
+        }
+
+        .booking-detail {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .booking-detail strong {
+            display: block;
+            color: var(--charcoal);
+            margin-bottom: 0.2rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .booking-detail p {
+            color: var(--light-text);
+            font-size: 0.95rem;
+        }
+
+        .booking-form {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--charcoal);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #e8e4de;
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            background: var(--cream);
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--terracotta);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--terracotta);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover { background: var(--terracotta-dark); }
+
+        /* Footer */
+        footer {
+            background: var(--charcoal);
+            color: rgba(255,255,255,0.5);
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-bottom: 3rem;
+            text-align: left;
+        }
+
+        .footer-col h3 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-col p, .footer-col a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-size: 0.9rem;
+            line-height: 2;
+            display: block;
+            transition: color 0.3s;
+        }
+
+        .footer-col a:hover { color: var(--terracotta); }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+            font-size: 0.85rem;
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px; right: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: var(--cream);
+                flex-direction: column;
+                align-items: center;
+                padding-top: 3rem;
+                transition: right 0.3s;
+            }
+
+            .nav-links.active { right: 0; }
+
+            .hamburger { display: flex; }
+
+            .hero { padding-top: 80px; }
+
+            .btn-outline { margin-left: 0; margin-top: 1rem; }
+
+            .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+
+            .about-images img:first-child { height: 250px; }
+            .about-images img { height: 200px; }
+
+            .rooms-section { padding: 3rem 1.5rem; }
+
+            .gallery { grid-template-columns: repeat(2, 1fr); }
+
+            .experience-section h2 { font-size: 2.2rem; }
+
+            .booking-grid { grid-template-columns: 1fr; gap: 3rem; }
+
+            .form-row { grid-template-columns: 1fr; }
+
+            .footer-content { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
+
+            section { padding: 4rem 5%; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo">La <span>Quercia</span></a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#camere">Camere</a></li>
+            <li><a href="#esperienze">Esperienze</a></li>
+            <li><a href="#galleria">Galleria</a></li>
+            <li><a href="#prenota">Prenota</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-badge">Agriturismo in Toscana</div>
+        <h1>La Quercia<em>Country House</em></h1>
+        <p>Un rifugio di pace tra le colline toscane, a pochi minuti da Siena. Natura, genuinità e l'ospitalità di una volta ti aspettano.</p>
+        <div>
+            <a href="#prenota" class="btn">Prenota il Tuo Soggiorno</a>
+            <a href="#camere" class="btn btn-outline">Esplora le Camere</a>
+        </div>
+        <div class="scroll-indicator">↓</div>
+    </section>
+
+    <section id="about">
+        <div class="about-grid">
+            <div class="about-images">
+                <img src="https://images.unsplash.com/photo-1587061949409-02df41d5e562?w=800&q=80" alt="Vista della tenuta">
+                <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=600&q=80" alt="Colazione in giardino">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80" alt="Interno rustico">
+            </div>
+            <div class="about-text">
+                <h2>Un Angolo di <em>Paradiso</em> tra le Colline</h2>
+                <p>La Quercia è un antico podere del XVIII secolo, ristrutturato con cura per offrire il comfort moderno senza perdere l'anima rurale toscana. Siamo immersi in 15 ettari di oliveti, vigneti e boschi.</p>
+                <p>Ogni mattina serviamo una colazione a base di prodotti a km 0: miele dei nostri alveari, pane fatto in casa, formaggi del caseificio locale, e la nostra famosa torta di mele della nonna Carla.</p>
+                <p>Che tu voglia rilassarti a bordo piscina, esplorare i sentieri a piedi o visitare Siena e San Gimignano, troverai qui la tua dimensione.</p>
+                <div class="about-signature">
+                    Carla e Marco
+                    <span>I tuoi ospiti</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="camere">
+        <div class="section-header">
+            <h2>Le Nostre Camere</h2>
+            <p>Arredi in legno antico, biancheria pregiata e vista sulle colline. Ogni camera è un'esperienza unica.</p>
+        </div>
+        <div class="rooms-section">
+            <div class="rooms-grid">
+                <div class="room-card">
+                    <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=600&q=80" alt="Camera Lavanda" class="room-img">
+                    <div class="room-content">
+                        <h3>Camera Lavanda</h3>
+                        <div class="room-price">€95 <span>/ notte</span></div>
+                        <p>Camera doppia con vista sul giardino interno, arredi in legno di castagno e bagno in travertino.</p>
+                        <div class="room-features">
+                            <span>2 Ospiti</span>
+                            <span>Bagno Privato</span>
+                            <span>WiFi</span>
+                            <span>Colazione Inclusa</span>
+                        </div>
+                        <a href="#prenota" class="btn">Verifica Disponibilità</a>
+                    </div>
+                </div>
+                <div class="room-card">
+                    <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=600&q=80" alt="Camera Girasole" class="room-img">
+                    <div class="room-content">
+                        <h3>Camera Girasole</h3>
+                        <div class="room-price">€120 <span>/ notte</span></div>
+                        <p>Spaziosa suite con terrazza privata, vista panoramica sulle colline e vasca da bagno in camera.</p>
+                        <div class="room-features">
+                            <span>2 Ospiti</span>
+                            <span>Terrazza</span>
+                            <span>Vasca</span>
+                            <span>Colazione Inclusa</span>
+                        </div>
+                        <a href="#prenota" class="btn">Verifica Disponibilità</a>
+                    </div>
+                </div>
+                <div class="room-card">
+                    <img src="https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?w=600&q=80" alt="Appartamento Quercia" class="room-img">
+                    <div class="room-content">
+                        <h3>Appartamento Quercia</h3>
+                        <div class="room-price">€180 <span>/ notte</span></div>
+                        <p>Appartamento indipendente con cucina, soggiorno, camera da letto e patio privato. Ideale per famiglie.</p>
+                        <div class="room-features">
+                            <span>4 Ospiti</span>
+                            <span>Cucina</span>
+                            <span>Patio</span>
+                            <span>Colazione Inclusa</span>
+                        </div>
+                        <a href="#prenota" class="btn">Verifica Disponibilità</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="section-header">
+            <h2>Cosa Troverai Qui</h2>
+            <p>Tutto ciò di cui hai bisogno per un soggiorno perfetto.</p>
+        </div>
+        <div class="amenities-grid">
+            <div class="amenity">
+                <div class="amenity-icon">🏊</div>
+                <h3>Piscina Naturale</h3>
+                <p>Piscina a sfioro con vista sulle colline, aperta da maggio a settembre.</p>
+            </div>
+            <div class="amenity">
+                <div class="amenity-icon">🍷</div>
+                <h3>Degustazione Vini</h3>
+                <p>Visita la nostra cantina e degusta Chianti e Brunello di produzione locale.</p>
+            </div>
+            <div class="amenity">
+                <div class="amenity-icon">🚴</div>
+                <h3>Noleggio Bici</h3>
+                <p>Mountain bike e e-bike per esplorare i sentieri delle Crete Senesi.</p>
+            </div>
+            <div class="amenity">
+                <div class="amenity-icon">🍳</div>
+                <h3>Corso di Cucina</h3>
+                <p>Impara a preparare pici, ribollita e cantucci con la nonna Carla.</p>
+            </div>
+            <div class="amenity">
+                <div class="amenity-icon">🐴</div>
+                <h3>Passeggiate a Cavallo</h3>
+                <p>Escursioni a cavallo tra vigneti e boschi con guida esperta.</p>
+            </div>
+            <div class="amenity">
+                <div class="amenity-icon">🌿</div>
+                <h3>Orto Biologico</h3>
+                <p>Visita il nostro orto e raccogli verdure fresche per la tua cena.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery-section" id="galleria">
+        <div class="gallery-header">
+            <h2>La Nostra Galleria</h2>
+            <p>Scorpi gli angoli più belli de La Quercia.</p>
+        </div>
+        <div class="gallery">
+            <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600&q=80" alt="Piscina">
+            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=80" alt="Esterno">
+            <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=600&q=80" alt="Giardino">
+            <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=600&q=80" alt="Camera">
+            <img src="https://images.unsplash.com/photo-1540555700478-4be289fbec6e?w=600&q=80" alt="Colazione">
+            <img src="https://images.unsplash.com/photo-1510074377623-8cf13fb86c08?w=600&q=80" alt="Vigneti">
+            <img src="https://images.unsplash.com/photo-1602002418816-5c0aeef426aa?w=600&q=80" alt="Cucina">
+            <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=600&q=80" alt="Tramonto">
+        </div>
+    </section>
+
+    <section class="experience-section" id="esperienze">
+        <h2>Un'<em>Esperienza</em> da Ricordare</h2>
+        <p>Regala un soggiorno a La Quercia. I nostri voucher regalo sono il presente perfetto per chi ama la natura, il buon cibo e la tranquillità.</p>
+        <a href="#prenota" class="btn">Richiedi un Voucher Regalo</a>
+    </section>
+
+    <section id="prenota">
+        <div class="booking-grid">
+            <div class="booking-info">
+                <h2>Prenota il Tuo Soggiorno</h2>
+                <p>Compila il modulo per verificare la disponibilità. Ti risponderemo entro 2 ore con la conferma e le indicazioni per raggiungerci.</p>
+                
+                <div class="booking-detail">
+                    <div>
+                        <strong>Indirizzo</strong>
+                        <p>Strada Provinciale 222, Km 5<br>53041 Castelnuovo Berardenga (SI)</p>
+                    </div>
+                </div>
+                <div class="booking-detail">
+                    <div>
+                        <strong>Telefono</strong>
+                        <p>+39 0577 123 456</p>
+                    </div>
+                </div>
+                <div class="booking-detail">
+                    <div>
+                        <strong>Email</strong>
+                        <p>info@laquercia.it</p>
+                    </div>
+                </div>
+                <div class="booking-detail">
+                    <div>
+                        <strong>Check-in / Check-out</strong>
+                        <p>15:00 – 11:00</p>
+                    </div>
+                </div>
+            </div>
+
+            <form class="booking-form" onsubmit="event.preventDefault(); alert('Grazie! Ti contatteremo entro 2 ore per confermare la disponibilità.');">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Nome</label>
+                        <input type="text" placeholder="Mario" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Cognome</label>
+                        <input type="text" placeholder="Rossi" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="mario.rossi@email.it" required>
+                </div>
+                <div class="form-group">
+                    <label>Telefono</label>
+                    <input type="tel" placeholder="+39 333 123 4567">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Check-in</label>
+                        <input type="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Check-out</label>
+                        <input type="date" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Ospiti</label>
+                        <select required>
+                            <option value="">Seleziona</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5+</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Camera</label>
+                        <select required>
+                            <option value="">Seleziona</option>
+                            <option>Camera Lavanda</option>
+                            <option>Camera Girasole</option>
+                            <option>Appartamento Quercia</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Messaggio / Richieste Speciali</label>
+                    <textarea placeholder="Allergie, culle, anniversari..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Verifica Disponibilità</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3>La Quercia</h3>
+                <p>Agriturismo in Toscana</p>
+                <p>Strada Provinciale 222, Km 5</p>
+                <p>53041 Castelnuovo Berardenga (SI)</p>
+            </div>
+            <div class="footer-col">
+                <h3>Link Utili</h3>
+                <a href="#camere">Le Camere</a>
+                <a href="#esperienze">Esperienze</a>
+                <a href="#galleria">Galleria</a>
+                <a href="#prenota">Prenota</a>
+            </div>
+            <div class="footer-col">
+                <h3>Contatti</h3>
+                <p>+39 0577 123 456</p>
+                <p>info@laquercia.it</p>
+                <p>WhatsApp: +39 333 987 6543</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Agriturismo La Quercia. Sito dimostrativo per portfolio. | P.IVA 01234567890</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+
+</body>
+</html>

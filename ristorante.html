@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Al Dente  – Ristorante Tradizionale Italiano</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #FDF8F3;
+            --wine: #722F37;
+            --wine-dark: #5A252C;
+            --gold: #C9A227;
+            --charcoal: #2C2C2C;
+            --text: #444;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background: var(--cream);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 { font-family: 'Playfair Display', serif; color: var(--charcoal); }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            background: rgba(253, 248, 243, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--wine);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--charcoal);
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--wine); }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 2px;
+            background: var(--charcoal);
+            transition: 0.3s;
+        }
+
+        /* Hero */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+                        url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1920&q=80') center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            color: white;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--wine);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            border: 2px solid var(--wine);
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: white;
+            border-color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border-color: white;
+            margin-left: 1rem;
+        }
+
+        .btn-outline:hover { background: white; color: var(--wine); }
+
+        /* Sections */
+        section { padding: 6rem 5%; max-width: 1200px; margin: 0 auto; }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--gold);
+            margin: 1rem auto;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        /* About */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-img {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .about-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .about-text h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-text p { margin-bottom: 1rem; }
+
+        /* Menu */
+        .menu-section { background: white; border-radius: 30px; padding: 4rem; box-shadow: 0 10px 40px rgba(0,0,0,0.05); }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-item {
+            padding: 1.5rem;
+            border-radius: 15px;
+            transition: transform 0.3s;
+        }
+
+        .menu-item:hover { transform: translateY(-5px); }
+
+        .menu-item h3 {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .price { color: var(--wine); font-weight: 600; font-family: 'Inter', sans-serif; }
+
+        .menu-item p { color: #777; font-size: 0.95rem; }
+
+        /* Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 15px;
+            transition: transform 0.3s;
+        }
+
+        .gallery img:hover { transform: scale(1.05); }
+
+        /* Reservation */
+        .reservation {
+            background: var(--wine);
+            color: white;
+            border-radius: 30px;
+            padding: 4rem;
+            text-align: center;
+        }
+
+        .reservation h2 { color: white; margin-bottom: 1rem; }
+
+        .reservation-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            max-width: 800px;
+            margin: 2rem auto 0;
+        }
+
+        .reservation-form input,
+        .reservation-form select {
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+        }
+
+        .reservation-form button {
+            grid-column: 1 / -1;
+            padding: 1rem;
+            background: var(--gold);
+            color: var(--charcoal);
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .reservation-form button:hover { background: #b8941f; }
+
+        /* Footer */
+        footer {
+            background: var(--charcoal);
+            color: #aaa;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        footer h3 { color: white; margin-bottom: 1rem; }
+
+        .footer-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-info div { text-align: center; }
+
+        .footer-info strong { color: white; display: block; margin-bottom: 0.3rem; }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px; right: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: var(--cream);
+                flex-direction: column;
+                align-items: center;
+                padding-top: 3rem;
+                transition: right 0.3s;
+            }
+
+            .nav-links.active { right: 0; }
+
+            .hamburger { display: flex; }
+
+            .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+
+            .gallery { grid-template-columns: repeat(2, 1fr); }
+
+            .btn-outline { margin-left: 0; margin-top: 1rem; }
+
+            .hero { padding-top: 80px; }
+
+            .menu-section { padding: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo">Al Dente</a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">La Nostra Storia</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#galleria">Galleria</a></li>
+            <li><a href="#prenota">Prenota</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <section class="hero" id="home">
+        <h1>Al Dente</h1>
+        <p>Cucina tradizionale italiana, ingredienti freschi del territorio, e l'ospitalità di una volta. Dal 1987 nel cuore della città.</p>
+        <div>
+            <a href="#prenota" class="btn">Prenota un Tavolo</a>
+            <a href="#menu" class="btn btn-outline">Scopri il Menu</a>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="about-grid">
+            <div class="about-img">
+                <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&q=80" alt="Interno del ristorante">
+            </div>
+            <div class="about-text">
+                <h2>Una Storia di Passione</h2>
+                <p>Al Dente nasce dalla passione di una famiglia per la cucina autentica. Ogni piatto racconta una storia: quella delle mani che l'hanno preparato, degli ingredienti selezionati ogni mattina al mercato locale, della tradizione che si rinnova.</p>
+                <p>Il nostro chef Marco utilizza solo prodotti stagionali e a km 0, trasformando semplici materie prime in opere d'arte culinarie. Dal pane fatto in casa ai dolci della nonna, ogni dettaglio è curato con amore.</p>
+                <p><strong>Vieni a trovarci. Ti aspettiamo a braccia aperte.</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <section id="menu">
+        <h2 class="section-title">Il Nostro Menu</h2>
+        <p class="section-subtitle">Specialità della casa, preparate ogni giorno con ingredienti freschi</p>
+        <div class="menu-section">
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <h3>Tagliere di Salumi e Formaggi <span class="price">€16</span></h3>
+                    <p>Selezione di prosciutto crudo di Parma, pecorino toscano stagionato, miele locale e crostini artigianali.</p>
+                </div>
+                <div class="menu-item">
+                    <h3>Risotto allo Zafferano <span class="price">€18</span></h3>
+                    <p>Carnaroli mantecato al momento con zafferano di Cascia e midollo di bue, croccante di parmigiano.</p>
+                </div>
+                <div class="menu-item">
+                    <h3>Tagliatelle al Ragù <span class="price">€14</span></h3>
+                    <p>Fatto in casa ogni mattina, ragù di manzo brasato 6 ore, scaglie di parmigiano reggiano 36 mesi.</p>
+                </div>
+                <div class="menu-item">
+                    <h3>Filetto di Branzino <span class="price">€22</span></h3>
+                    <p>Cotto al vapore con erbe aromatiche, crema di patate al limone, verdure di stagione saltate.</p>
+                </div>
+                <div class="menu-item">
+                    <h3>Bistecca alla Fiorentina <span class="price">€32</span></h3>
+                    <p>Chianina IGP da 800g, cotta sulla brace di legna di rovere, servita con fagioli all'olio.</p>
+                </div>
+                <div class="menu-item">
+                    <h3>Tiramisù della Casa <span class="price">€8</span></h3>
+                    <p>La ricetta segreta della nonna Luisa. Savoiardi inzuppati nel caffè, mascarpone fresco, cacao amaro.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="galleria">
+        <h2 class="section-title">Galleria</h2>
+        <p class="section-subtitle">Atmosfera, piatti e momenti speciali</p>
+        <div class="gallery">
+            <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80" alt="Piatto gourmet">
+            <img src="https://images.unsplash.com/photo-1550966871-3ed3c47e2ce2?w=600&q=80" alt="Pasta fresca">
+            <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&q=80" alt="Interno elegante">
+            <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=600&q=80" alt="Cocktail">
+        </div>
+    </section>
+
+    <section id="prenota">
+        <div class="reservation">
+            <h2>Prenota il Tuo Tavolo</h2>
+            <p>Per una cena romantica, una cena di lavoro o una festa con gli amici. Ti aspettiamo.</p>
+            <form class="reservation-form" onsubmit="event.preventDefault(); alert('Grazie! Ti contatteremo presto per confermare la prenotazione.');">
+                <input type="text" placeholder="Nome e Cognome" required>
+                <input type="tel" placeholder="Telefono" required>
+                <input type="date" required>
+                <select required>
+                    <option value="">Ora</option>
+                    <option>19:30</option>
+                    <option>20:00</option>
+                    <option>20:30</option>
+                    <option>21:00</option>
+                    <option>21:30</option>
+                </select>
+                <select required>
+                    <option value="">Persone</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5-8</option>
+                    <option>8+</option>
+                </select>
+                <button type="submit">Conferma Prenotazione</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <h3>Al Dente – Ristorante Tradizionale</h3>
+        <div class="footer-info">
+            <div>
+                <strong>Indirizzo</strong>
+                Via Roma 42, 00100 Roma
+            </div>
+            <div>
+                <strong>Telefono</strong>
+                +39 06 123 4567
+            </div>
+            <div>
+                <strong>Orari</strong>
+                Mar–Dom: 19:30 – 23:30
+            </div>
+        </div>
+        <p style="font-size: 0.85rem; opacity: 0.6;">© 2026 Al Dente. Sito dimostrativo per portfolio.</p>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
