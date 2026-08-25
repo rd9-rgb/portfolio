@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biglietto da Visita — Rossi & Associati</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #1a1a1a;
+            color: #888;
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3rem;
+            min-height: 100vh;
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .page-header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: #c9a96e;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            font-size: 0.85rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        /* Card Section */
+        .card-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .card-label {
+            font-size: 0.75rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-weight: 500;
+        }
+
+        .card-wrapper {
+            width: 85mm;
+            height: 55mm;
+            border-radius: 3mm;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(201,169,110,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            background: transparent;
+        }
+
+        .card-wrapper:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 35px 70px rgba(0,0,0,0.7), 0 0 0 1px rgba(201,169,110,0.2);
+        }
+
+        .card-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* Print Button */
+        .print-btn {
+            padding: 1rem 3rem;
+            background: transparent;
+            color: #c9a96e;
+            border: 1.5px solid #c9a96e;
+            border-radius: 50px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 1rem;
+            transition: all 0.3s;
+        }
+
+        .print-btn:hover {
+            background: #c9a96e;
+            color: #1a1a1a;
+        }
+
+        /* Print */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+                gap: 0;
+            }
+            .page-header,
+            .card-label,
+            .print-btn { 
+                display: none; 
+            }
+            .card-wrapper {
+                box-shadow: none;
+                page-break-after: always;
+                margin: 0 auto;
+            }
+            .card-section {
+                gap: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 2rem 1rem; }
+            .page-header h1 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-header">
+        <h1>Rossi & Associati</h1>
+        <p>Biglietto da Visita — Formato 85 × 55 mm</p>
+    </div>
+
+    <div class="card-section">
+        <div class="card-label">Fronte</div>
+        <div class="card-wrapper">
+            <img src="card2.png" alt="Fronte biglietto da visita">
+        </div>
+    </div>
+
+    <div class="card-section">
+        <div class="card-label">Retro</div>
+        <div class="card-wrapper">
+            <img src="card1.png" alt="Retro biglietto da visita">
+        </div>
+    </div>
+
+    <button class="print-btn" onclick="window.print()">🖨️ Stampa / Salva PDF</button>
+
+</body>
+</html>
