@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rebal Dib – Web Designer & Interior Designer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://me.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=VRjBc-BsCgDeeyvXxDJkkRBzZKPPQBQ6FRWYBfwZjRMkQJSWbFb0UkRf_EYiu9YCP0b4FBejxb1-YvRNYxlEOv1KOAPWf_eYNo4A_qhr4ky2dgTeMxMjQvGsmgwl3nTnEBnS3HRTIJuEC-zWK9TYVX_jFJghlplBmXQOQwsOycQoBAPGe1Qm5yEqkyC8ZQeYUPicBjg_FHfDYnoZvvLYcr1qjBdtrlEV_7oxowzXjzCQ4vZbxwrcehC9zMVYkqtbdRv3XDm7WMt8K7DEs50NiPp83uBBPQH6Y6M0QqWmsFYQAonXbVKLAgrp3ymSlIgrh46nRUOXnZ2Sm_8MrnNMuTvYqH3HYOkwdvYxvqjSx2tdTfmuBPZ-tQJgrLQvj78ncyIKLlUkyJBBBhBDA1HUECaoY2OJCKwaGk5qLP98D-8JEXxQc6-GzXpYN9lVKbKnaLRymIPUkbXQ1XKMgEL29Mmqqa3TfPXJeDcqhbDoH_pvZ3TlfcO1GMaiAl8U7sR64au_q9Xwe4chw6HPz666wsOtY7d6U2T0zTs2_eB5yIt9znjZws2zmMih6oiLJHGRMjkznAt0GC15s15OJHHHmhWccs5UFbLG4Momw4aRwPO-fILxqpuPGtdssX4nM2z1fkRyhuV1qX1IWr_FMw-8AQ" charset="UTF-8"></script><style>
+        :root {
+            --cream: #FAF9F6;
+            --charcoal: #1C1C1C;
+            --terracotta: #C06C4F;
+            --terracotta-dark: #A85A40;
+            --muted: #888;
+            --light-gray: #EAE8E3;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--charcoal);
+            background: var(--cream);
+            line-height: 1.7;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            background: rgba(250, 249, 246, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--charcoal);
+            text-decoration: none;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--charcoal);
+            font-weight: 500;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--terracotta); }
+
+        /* Language Switcher */
+        .lang-switch {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: var(--light-gray);
+            border-radius: 50px;
+            padding: 0.25rem;
+            border: 1px solid var(--light-gray);
+        }
+
+        .lang-switch button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.4rem 0.9rem;
+            border-radius: 50px;
+            color: var(--muted);
+            transition: all 0.3s;
+        }
+
+        .lang-switch button.active {
+            background: white;
+            color: var(--charcoal);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .lang-switch button:hover:not(.active) {
+            color: var(--charcoal);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .hamburger span {
+            width: 25px; height: 2px;
+            background: var(--charcoal);
+            transition: 0.3s;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8rem 5% 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(250,249,246,0.88) 0%, rgba(250,249,246,0.75) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content { max-width: 800px; }
+
+        .hero-tag {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border: 1px solid var(--terracotta);
+            color: var(--terracotta);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 2rem;
+            border-radius: 50px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: var(--terracotta);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--muted);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            font-weight: 300;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--terracotta);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            border: 2px solid var(--terracotta);
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            background: var(--terracotta-dark);
+            border-color: var(--terracotta-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--charcoal);
+            border-color: var(--charcoal);
+            margin-left: 1rem;
+        }
+
+        .btn-outline:hover {
+            background: var(--charcoal);
+            color: white;
+            border-color: var(--charcoal);
+        }
+
+        /* Sections */
+        section { padding: 6rem 5%; max-width: 1200px; margin: 0 auto; }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-header h2::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 2px;
+            background: var(--terracotta);
+            margin: 1rem auto 0;
+        }
+
+        .section-header p {
+            color: var(--muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* About */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .about-text h2 em {
+            color: var(--terracotta);
+            font-style: italic;
+        }
+
+        .about-text p {
+            color: var(--muted);
+            margin-bottom: 1.2rem;
+        }
+
+        .about-img img {
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+        }
+
+        .skills {
+            margin-top: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .skill {
+            background: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid var(--light-gray);
+            color: var(--charcoal);
+        }
+
+        /* Works */
+        .works-section { background: var(--charcoal); color: white; max-width: 100%; }
+        .works-section .section-header h2 { color: white; }
+        .works-section .section-header p { color: rgba(255,255,255,0.6); }
+
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .work-card {
+            background: #2a2a2a;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .work-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .zoom-img {
+            overflow: hidden;
+            border-radius: 16px 16px 0 0;
+            width: 100%;
+            height: 280px;
+        }
+
+        .work-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+
+        .zoom-img:hover .work-img {
+            transform: scale(1.15);
+        }
+
+        .work-content {
+            padding: 2rem;
+        }
+
+        .work-content h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .work-content p {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .work-link {
+            color: var(--terracotta);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s;
+        }
+
+        .work-link:hover { gap: 1rem; }
+
+        /* Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+        }
+
+        .service-card {
+            padding: 3rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+            transition: all 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: var(--muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-list {
+            list-style: none;
+        }
+
+        .service-list li {
+            padding: 0.5rem 0;
+            color: var(--charcoal);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .service-list li::before {
+            content: '—';
+            color: var(--terracotta);
+            font-weight: 700;
+        }
+
+        /* Contact */
+        .contact-section {
+            background: var(--light-gray);
+            border-radius: 30px;
+            padding: 5rem;
+            text-align: center;
+        }
+
+        .contact-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-section > p {
+            color: var(--muted);
+            margin-bottom: 2.5rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .contact-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+        }
+
+        .contact-item strong {
+            display: block;
+            color: var(--terracotta);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-item a {
+            color: var(--charcoal);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .contact-item a:hover { color: var(--terracotta); }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        footer strong {
+            color: var(--charcoal);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Fade in on scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Templates Section */
+        .templates-section {
+            background: var(--cream);
+            padding: 6rem 5%;
+            max-width: 100%;
+        }
+
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .template-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+            transition: transform 0.3s;
+            border: 1px solid var(--light-gray);
+        }
+
+        .template-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .template-preview {
+            background: linear-gradient(135deg, #722F37 0%, #5A252C 100%);
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            position: relative;
+        }
+
+        .template-preview::after {
+            content: '📄';
+            font-size: 3rem;
+            opacity: 0.3;
+            position: absolute;
+        }
+
+        .template-content {
+            padding: 2rem;
+        }
+
+        .template-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--charcoal);
+        }
+
+        .template-content p {
+            color: var(--muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .template-tag {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: var(--light-gray);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Interior Design Section */
+        .interior-section {
+            background: var(--charcoal);
+            color: white;
+            padding: 6rem 5%;
+            max-width: 100%;
+            margin-top: 6px;
+        }
+
+        .interior-section .section-header h2 {
+            color: white;
+        }
+
+        .interior-section .section-header p {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .interior-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .interior-card {
+            background: #2a2a2a;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .interior-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .interior-content {
+            padding: 2rem;
+        }
+
+        .interior-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: white;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .interior-content p {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .nav-right {
+                gap: 1rem;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px; right: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: var(--cream);
+                flex-direction: column;
+                align-items: center;
+                padding-top: 3rem;
+                transition: right 0.3s;
+            }
+
+            .nav-links.active { right: 0; }
+
+            .hamburger { display: flex; }
+
+            .hero { padding-top: 100px; }
+
+            .btn-outline { margin-left: 0; margin-top: 1rem; }
+
+            .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+
+            .works-grid { grid-template-columns: 1fr; }
+            .interior-grid { grid-template-columns: 1fr; }
+
+            .services-grid { grid-template-columns: 1fr; }
+
+            .contact-section { padding: 3rem 2rem; }
+
+            .contact-grid { grid-template-columns: 1fr; }
+
+            section { padding: 4rem 5%; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo">Rebal Dib</a>
+        <div class="nav-right">
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#works" data-key="nav_works">Lavori</a></li>
+                <li><a href="#about" data-key="nav_about">Chi Sono</a></li>
+                <li><a href="#servizi" data-key="nav_services">Servizi</a></li>
+                <li><a href="#contatti" data-key="nav_contact">Contatti</a></li>
+            </ul>
+            <div class="lang-switch">
+                <button class="active" data-lang="it" onclick="setLang('it')">IT</button>
+                <button data-lang="en" onclick="setLang('en')">EN</button>
+            </div>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <video autoplay muted loop playsinline preload="auto" poster="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1200&q=80" class="hero-video">
+            <source src="hero-video.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-tag">Web Designer & Interior Designer</div>
+            <h1 data-key="hero_title">Creo <em>spazi</em> — digitali e fisici — che raccontano la tua storia.</h1>
+            <p data-key="hero_desc">Costruisco siti web professionali per attività locali e progetto interni con la stessa cura per i dettagli. Dal codice al cimento, il design è il mio linguaggio.</p>
+            <div>
+                <a href="#works" class="btn" data-key="hero_cta1">Vedi i Miei Lavori</a>
+                <a href="#contatti" class="btn btn-outline" data-key="hero_cta2">Contattami</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="fade-in">
+        <div class="about-grid">
+            <div class="about-text">
+                <h2 data-key="about_title">Due Mondi, <em>Una Visione</em></h2>
+                <p data-key="about_p1">Sono Rebal Dib, designer con una doppia passione: il <strong>web</strong> e gli <strong>interni</strong>. Credo che un ristorante meriti un sito bello quanto il suo arredamento, e che uno studio legale debba trasmettere fiducia sia nella sala d'attesa sia online.</p>
+                <p data-key="about_p2">Per le attività italiane, costruisco siti moderni, veloci e ottimizzati per i clienti locali. Per gli spazi abitativi, progetto interni che bilanciano estetica e funzionalità.</p>
+                <p data-key="about_p3">Ogni progetto inizia dall'ascolto: capire chi sei, cosa vendi, e come vuoi farti percepire. Il resto è design.</p>
+                <div class="skills">
+                    <span class="skill" data-key="skill_1">HTML / CSS / JS</span>
+                    <span class="skill" data-key="skill_2">Responsive Design</span>
+                    <span class="skill" data-key="skill_3">SEO Locale</span>
+                    <span class="skill" data-key="skill_4">Progettazione Interni</span>
+                    <span class="skill" data-key="skill_5">Rendering 3D</span>
+                    <span class="skill" data-key="skill_6">Arredo su Misura</span>
+                </div>
+            </div>
+            <div class="about-img">
+                <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80" alt="Interior design workspace">
+            </div>
+        </div>
+    </section>
+
+    <section class="works-section" id="works">
+        <div class="section-header fade-in">
+            <h2 data-key="works_title">Progetti Web</h2>
+            <p data-key="works_desc">Siti dimostrativi costruiti per attività locali. Ogni progetto è responsive, veloce e pronto per essere personalizzato.</p>
+        </div>
+        <div class="works-grid">
+            <div class="work-card">
+                <div class="zoom-img">
+                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80" alt="Ristorante Al Dente" class="work-img">
+                </div>
+                <div class="work-content">
+                    <h3>Al Dente</h3>
+                    <p data-key="work1_desc">Sito vetrina per ristorante tradizionale italiano. Menu interattivo, galleria fotografica e sistema di prenotazione tavoli.</p>
+                    <a href="ristorante.html" target="_blank" class="work-link" data-key="visit_site">Visita il sito →</a>
+                </div>
+            </div>
+            <div class="work-card">
+                <div class="zoom-img">
+                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80" alt="Studio Legale Rossi" class="work-img">
+                </div>
+                <div class="work-content">
+                    <h3>Rossi & Associati</h3>
+                    <p data-key="work2_desc">Studio legale professionale con aree di pratica, presentazione del team e modulo di contatto strutturato.</p>
+                    <a href="avvocato.html" target="_blank" class="work-link" data-key="visit_site">Visita il sito →</a>
+                </div>
+            </div>
+            <div class="work-card">
+                <div class="zoom-img">
+                    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80" alt="Iron Lab Palestra" class="work-img">
+                </div>
+                <div class="work-content">
+                    <h3>Iron Lab</h3>
+                    <p data-key="work3_desc">Palestra e personal training. Design dark e aggressivo con pricing table, testimonianze e call-to-action forti.</p>
+                    <a href="palestra.html" target="_blank" class="work-link" data-key="visit_site">Visita il sito →</a>
+                </div>
+            </div>
+            <div class="work-card">
+                <div class="zoom-img">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80" alt="Agriturismo La Quercia" class="work-img">
+                </div>
+                <div class="work-content">
+                    <h3>La Quercia</h3>
+                    <p data-key="work4_desc">Agriturismo in Toscana con galleria fotografica, schede camere, prezzi e modulo di prenotazione soggiorno.</p>
+                    <a href="agriturismo.html" target="_blank" class="work-link" data-key="visit_site">Visita il sito →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="templates-section fade-in" id="templates">
+        <div class="section-header">
+            <h2 data-key="templates_title">Templates & Stampa</h2>
+            <p data-key="templates_desc">Materiali pronti per la stampa e il digitale. Menu, volantini, biglietti da visita e altro.</p>
+        </div>
+        <div class="templates-grid">
+            <div class="template-card">
+                <div class="template-preview" style="background: linear-gradient(135deg, #5B6236 0%, #C4704B 100%);">
+                    <span style="position:relative;z-index:1;" data-key="template1_label">Menu Creativo</span>
+                </div>
+                <div class="template-content">
+                    <span class="template-tag" data-key="tag_print">Stampa & PDF</span>
+                    <h3 data-key="template1_title">Menu Editoriale</h3>
+                    <p data-key="template1_desc">Menu moderno in stile magazine con layout asimmetrico, sezione pizza in evidenza, grafica CSS e tag per allergeni. Pronto per la stampa A4.</p>
+                    <a href="menu-creativo.html" target="_blank" class="work-link" data-key="preview">Vedi anteprima →</a>
+                </div>
+            </div>
+            <div class="template-card">
+                <div class="template-preview" style="background: linear-gradient(135deg, #1a2744 0%, #0f1728 100%);">
+                    <span style="position:relative;z-index:1;" data-key="template2_label">Biglietto Avvocato</span>
+                </div>
+                <div class="template-content">
+                    <span class="template-tag" data-key="tag_print">Stampa & PDF</span>
+                    <h3 data-key="template2_title">Biglietto da Visita — Legale</h3>
+                    <p data-key="template2_desc">Design elegante fronte/retro in formato 85x55mm. Fondo blu navy, dettagli oro, monogramma circolare. Pronto per stampa in tipografia.</p>
+                    <a href="biglietto-avvocato.html" target="_blank" class="work-link" data-key="preview">Vedi anteprima →</a>
+                </div>
+            </div>
+            <div class="template-card">
+                <div class="template-preview" style="background: linear-gradient(135deg, #5B6236 0%, #7A8250 100%);">
+                    <span style="position:relative;z-index:1;" data-key="template3_label">Prossimamente</span>
+                </div>
+                <div class="template-content">
+                    <span class="template-tag" data-key="tag_soon">In arrivo</span>
+                    <h3 data-key="template3_title">Altri Template</h3>
+                    <p data-key="template3_desc">Volantini, brochure, menu per bar, biglietti da visita per ristoranti e altri materiali di comunicazione.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="interior-section fade-in" id="interior">
+        <div class="section-header">
+            <h2 data-key="interior_title">Progetti di <span>Interior Design</span></h2>
+            <p data-key="interior_desc">Spazi abitativi e commerciali progettati con cura per i dettagli, la luce e la funzionalità.</p>
+        </div>
+        <div class="interior-grid">
+            <div class="interior-card">
+                <div class="zoom-img">
+                    <img src="render-ristorante.jpg" alt="Ristorante Industriale Milano" class="work-img">
+                </div>
+                <div class="interior-content">
+                    <h3>Ristorante Industriale — Milano</h3>
+                    <p data-key="interior1_desc">Ex fabbrica del XIX secolo trasformata in un ristorante da 120 coperti. Mattoni a vista originali, archi in ferro e vetro, sedute in pelle bordeaux. Un dialogo tra storia industriale e design contemporaneo.</p>
+                </div>
+            </div>
+            <div class="interior-card">
+                <div class="zoom-img">
+                    <img src="render-appartamento.jpg" alt="Appartamento Panoramico Roma" class="work-img">
+                </div>
+                <div class="interior-content">
+                    <h3>Appartamento Panoramico — Roma</h3>
+                    <p data-key="interior2_desc">Open space di 110mq con vista città a 360°. Isola cucina in rovere naturale, palette neutra, grandi vetrate. Progettato per massimizzare la luce naturale in ogni ambiente.</p>
+                </div>
+            </div>
+            <div class="interior-card">
+                <div class="zoom-img">
+                    <img src="render-penthouse.png" alt="Penthouse Torino" class="work-img">
+                </div>
+                <div class="interior-content">
+                    <h3>Penthouse con Cortile — Torino</h3>
+                    <p data-key="interior3_desc">Residenza di lusso con cortile interno e ulivo secolare. Boiserie in legno scuro, marmo lucido, vetrate floor-to-ceiling con vista piscina privata. Eleganza senza tempo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="servizi" class="fade-in">
+        <div class="section-header">
+            <h2 data-key="services_title">Servizi</h2>
+            <p data-key="services_desc">Cosa posso fare per te e per la tua attività.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">💻</div>
+                <h3 data-key="service1_title">Web Design</h3>
+                <p data-key="service1_desc">Siti web professionali per attività locali: ristoranti, studi professionali, negozi, palestre e B&B.</p>
+                <ul class="service-list">
+                    <li data-key="service1_1">Siti vetrina one-page</li>
+                    <li data-key="service1_2">Design responsive (mobile-first)</li>
+                    <li data-key="service1_3">Ottimizzazione SEO locale</li>
+                    <li data-key="service1_4">Form di contatto e prenotazione</li>
+                    <li data-key="service1_5">Manutenzione mensile</li>
+                </ul>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🛋️</div>
+                <h3 data-key="service2_title">Interior Design</h3>
+                <p data-key="service2_desc">Progettazione di interni residenziali e commerciali. Dalla consulenza all'allestimento finale.</p>
+                <ul class="service-list">
+                    <li data-key="service2_1">Progettazione spazi</li>
+                    <li data-key="service2_2">Rendering fotorealistici</li>
+                    <li data-key="service2_3">Selezione materiali e finiture</li>
+                    <li data-key="service2_4">Arredo su misura</li>
+                    <li data-key="service2_5">Supervisione cantiere</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="contatti" class="fade-in">
+        <div class="contact-section">
+            <h2 data-key="contact_title">Lavoriamo Insieme?</h2>
+            <p data-key="contact_desc">Hai un'attività che ha bisogno di un sito? O uno spazio da trasformare? Scrivimi.</p>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <strong data-key="label_email">Email</strong>
+                    <a href="mailto:rebal.dib@email.it">rebal.dib@gmail.it</a>
+                </div>
+                <div class="contact-item">
+                    <strong data-key="label_phone">Telefono</strong>
+                    <a href="tel:+393426720686">+39 342 672 0686</a>
+                </div>
+                <div class="contact-item">
+                    <strong data-key="label_instagram">Instagram</strong>
+                    <a href="#">@rebal.dib</a>
+                </div>
+            </div>
+            <a href="mailto:rebal.dib@gmail.it" class="btn" data-key="contact_cta">Scrivimi una Mail</a>
+        </div>
+    </section>
+
+    <footer>
+        <strong>Rebal Dib</strong>
+        <p data-key="footer_line1">Web Designer & Interior Designer — Milano, Italia</p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem;" data-key="footer_copy">© 2026 Rebal Dib. Tutti i diritti riservati.</p>
+    </footer>
+
+    <script>
+        const translations = {
+            it: {
+                nav_works: "Lavori",
+                nav_about: "Chi Sono",
+                nav_services: "Servizi",
+                nav_contact: "Contatti",
+                hero_title: "Creo <em>spazi</em> — digitali e fisici — che raccontano la tua storia.",
+                hero_desc: "Costruisco siti web professionali per attività locali e progetto interni con la stessa cura per i dettagli. Dal codice al cimento, il design è il mio linguaggio.",
+                hero_cta1: "Vedi i Miei Lavori",
+                hero_cta2: "Contattami",
+                about_title: "Due Mondi, <em>Una Visione</em>",
+                about_p1: "Sono Rebal Dib, designer con una doppia passione: il <strong>web</strong> e gli <strong>interni</strong>. Credo che un ristorante meriti un sito bello quanto il suo arredamento, e che uno studio legale debba trasmettere fiducia sia nella sala d'attesa sia online.",
+                about_p2: "Per le attività italiane, costruisco siti moderni, veloci e ottimizzati per i clienti locali. Per gli spazi abitativi, progetto interni che bilanciano estetica e funzionalità.",
+                about_p3: "Ogni progetto inizia dall'ascolto: capire chi sei, cosa vendi, e come vuoi farti percepire. Il resto è design.",
+                skill_1: "HTML / CSS / JS",
+                skill_2: "Responsive Design",
+                skill_3: "SEO Locale",
+                skill_4: "Progettazione Interni",
+                skill_5: "Rendering 3D",
+                skill_6: "Arredo su Misura",
+                works_title: "Progetti Web",
+                works_desc: "Siti dimostrativi costruiti per attività locali. Ogni progetto è responsive, veloce e pronto per essere personalizzato.",
+                work1_desc: "Sito vetrina per ristorante tradizionale italiano. Menu interattivo, galleria fotografica e sistema di prenotazione tavoli.",
+                work2_desc: "Studio legale professionale con aree di pratica, presentazione del team e modulo di contatto strutturato.",
+                work3_desc: "Palestra e personal training. Design dark e aggressivo con pricing table, testimonianze e call-to-action forti.",
+                work4_desc: "Agriturismo in Toscana con galleria fotografica, schede camere, prezzi e modulo di prenotazione soggiorno.",
+                visit_site: "Visita il sito →",
+                templates_title: "Templates & Stampa",
+                templates_desc: "Materiali pronti per la stampa e il digitale. Menu, volantini, biglietti da visita e altro.",
+                template1_label: "Menu Creativo",
+                template1_title: "Menu Editoriale",
+                template1_desc: "Menu moderno in stile magazine con layout asimmetrico, sezione pizza in evidenza, grafica CSS e tag per allergeni. Pronto per la stampa A4.",
+                template2_label: "Biglietto Avvocato",
+                template2_title: "Biglietto da Visita — Legale",
+                template2_desc: "Design elegante fronte/retro in formato 85x55mm. Fondo blu navy, dettagli oro, monogramma circolare. Pronto per stampa in tipografia.",
+                template3_label: "Prossimamente",
+                template3_title: "Altri Template",
+                template3_desc: "Volantini, brochure, menu per bar, biglietti da visita per ristoranti e altri materiali di comunicazione.",
+                tag_print: "Stampa & PDF",
+                tag_soon: "In arrivo",
+                preview: "Vedi anteprima →",
+                interior_title: "Progetti di <span>Interior Design</span>",
+                interior_desc: "Spazi abitativi e commerciali progettati con cura per i dettagli, la luce e la funzionalità.",
+                interior1_desc: "Ex fabbrica del XIX secolo trasformata in un ristorante da 120 coperti. Mattoni a vista originali, archi in ferro e vetro, sedute in pelle bordeaux. Un dialogo tra storia industriale e design contemporaneo.",
+                interior2_desc: "Open space di 110mq con vista città a 360°. Isola cucina in rovere naturale, palette neutra, grandi vetrate. Progettato per massimizzare la luce naturale in ogni ambiente.",
+                interior3_desc: "Residenza di lusso con cortile interno e ulivo secolare. Boiserie in legno scuro, marmo lucido, vetrate floor-to-ceiling con vista piscina privata. Eleganza senza tempo.",
+                services_title: "Servizi",
+                services_desc: "Cosa posso fare per te e per la tua attività.",
+                service1_title: "Web Design",
+                service1_desc: "Siti web professionali per attività locali: ristoranti, studi professionali, negozi, palestre e B&B.",
+                service1_1: "Siti vetrina one-page",
+                service1_2: "Design responsive (mobile-first)",
+                service1_3: "Ottimizzazione SEO locale",
+                service1_4: "Form di contatto e prenotazione",
+                service1_5: "Manutenzione mensile",
+                service2_title: "Interior Design",
+                service2_desc: "Progettazione di interni residenziali e commerciali. Dalla consulenza all'allestimento finale.",
+                service2_1: "Progettazione spazi",
+                service2_2: "Rendering fotorealistici",
+                service2_3: "Selezione materiali e finiture",
+                service2_4: "Arredo su misura",
+                service2_5: "Supervisione cantiere",
+                contact_title: "Lavoriamo Insieme?",
+                contact_desc: "Hai un'attività che ha bisogno di un sito? O uno spazio da trasformare? Scrivimi.",
+                label_email: "Email",
+                label_phone: "Telefono",
+                label_instagram: "Instagram",
+                contact_cta: "Scrivimi una Mail",
+                footer_line1: "Web Designer & Interior Designer — Milano, Italia",
+                footer_copy: "© 2026 Rebal Dib. Tutti i diritti riservati."
+            },
+            en: {
+                nav_works: "Work",
+                nav_about: "About",
+                nav_services: "Services",
+                nav_contact: "Contact",
+                hero_title: "I Create <em>Spaces</em> — Digital and Physical — that tell your story.",
+                hero_desc: "I build professional websites for local businesses and design interiors with the same attention to detail. From code to concrete, design is my language.",
+                hero_cta1: "See My Work",
+                hero_cta2: "Get in Touch",
+                about_title: "Two Worlds, <em>One Vision</em>",
+                about_p1: "I'm Rebal Dib, a designer with a dual passion: <strong>web</strong> and <strong>interiors</strong>. I believe a restaurant deserves a website as beautiful as its furnishings, and that a law firm should inspire trust both in the waiting room and online.",
+                about_p2: "For Italian businesses, I build modern, fast, locally-optimized websites. For living spaces, I design interiors that balance aesthetics and functionality.",
+                about_p3: "Every project starts with listening: understanding who you are, what you sell, and how you want to be perceived. The rest is design.",
+                skill_1: "HTML / CSS / JS",
+                skill_2: "Responsive Design",
+                skill_3: "Local SEO",
+                skill_4: "Interior Design",
+                skill_5: "3D Rendering",
+                skill_6: "Custom Furniture",
+                works_title: "Web Projects",
+                works_desc: "Demo sites built for local businesses. Every project is responsive, fast, and ready to be customized.",
+                work1_desc: "Showcase website for a traditional Italian restaurant. Interactive menu, photo gallery, and table reservation system.",
+                work2_desc: "Professional law firm with practice areas, team presentation, and structured contact form.",
+                work3_desc: "Gym and personal training. Dark, bold design with pricing table, testimonials, and strong call-to-actions.",
+                work4_desc: "Tuscan farmhouse with photo gallery, room cards, pricing, and stay booking form.",
+                visit_site: "Visit site →",
+                templates_title: "Templates & Print",
+                templates_desc: "Ready-to-print and digital materials. Menus, flyers, business cards, and more.",
+                template1_label: "Creative Menu",
+                template1_title: "Editorial Menu",
+                template1_desc: "Modern magazine-style menu with asymmetric layout, highlighted pizza section, CSS graphics, and allergen tags. Ready for A4 printing.",
+                template2_label: "Lawyer Card",
+                template2_title: "Business Card — Legal",
+                template2_desc: "Elegant front/back design in 85x55mm format. Navy blue background, gold details, circular monogram. Ready for professional printing.",
+                template3_label: "Coming Soon",
+                template3_title: "More Templates",
+                template3_desc: "Flyers, brochures, bar menus, restaurant business cards, and other communication materials.",
+                tag_print: "Print & PDF",
+                tag_soon: "Coming Soon",
+                preview: "Preview →",
+                interior_title: "<span>Interior Design</span> Projects",
+                interior_desc: "Residential and commercial spaces designed with care for detail, light, and functionality.",
+                interior1_desc: "19th-century factory converted into a 120-seat restaurant. Original exposed brick, iron and glass arches, burgundy leather seating. A dialogue between industrial history and contemporary design.",
+                interior2_desc: "110 sqm open space with 360° city views. Natural oak kitchen island, neutral palette, large windows. Designed to maximize natural light in every room.",
+                interior3_desc: "Luxury residence with internal courtyard and centuries-old olive tree. Dark wood boiserie, polished marble, floor-to-ceiling windows overlooking a private pool. Timeless elegance.",
+                services_title: "Services",
+                services_desc: "What I can do for you and your business.",
+                service1_title: "Web Design",
+                service1_desc: "Professional websites for local businesses: restaurants, professional studios, shops, gyms, and B&Bs.",
+                service1_1: "One-page showcase sites",
+                service1_2: "Responsive design (mobile-first)",
+                service1_3: "Local SEO optimization",
+                service1_4: "Contact and booking forms",
+                service1_5: "Monthly maintenance",
+                service2_title: "Interior Design",
+                service2_desc: "Residential and commercial interior design. From consultation to final staging.",
+                service2_1: "Space planning",
+                service2_2: "Photorealistic renderings",
+                service2_3: "Material and finish selection",
+                service2_4: "Custom furniture",
+                service2_5: "Site supervision",
+                contact_title: "Let's Work Together?",
+                contact_desc: "Does your business need a website? Or a space to transform? Write to me.",
+                label_email: "Email",
+                label_phone: "Phone",
+                label_instagram: "Instagram",
+                contact_cta: "Send Me an Email",
+                footer_line1: "Web Designer & Interior Designer — Milan, Italy",
+                footer_copy: "© 2026 Rebal Dib. All rights reserved."
+            }
+        };
+
+        let currentLang = localStorage.getItem('lang') || 'it';
+
+        function setLang(lang) {
+            currentLang = lang;
+            localStorage.setItem('lang', lang);
+            document.documentElement.lang = lang;
+
+            document.querySelectorAll('.lang-switch button').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.dataset.key;
+                if (translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+        }
+
+        // Initialize
+        setLang(currentLang);
+
+        // Mobile menu
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Fade in on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                } else {
+                    entry.target.classList.remove('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        fadeElements.forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>
