@@ -3,199 +3,317 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iron Lab – Palestra e Personal Training a Roma</title>
+    <title>Iron Lab – Luxury Performance Club Milano</title>
+    <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         :root {
-            --black: #0a0a0a;
-            --dark: #111111;
-            --gray: #1a1a1a;
-            --neon: #ccff00;
-            --neon-dim: #b3e600;
-            --white: #ffffff;
-            --muted: #888888;
+            --bg-black: #060709;
+            --bg-surface: #0E1116;
+            --bg-card: rgba(18, 22, 29, 0.7);
+            --neon-volt: #CCFF00;
+            --neon-glow: rgba(204, 255, 0, 0.2);
+            --text-white: #FFFFFF;
+            --text-muted: #8E9BAE;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            
+            --font-display: 'Bebas Neue', sans-serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+            --transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: var(--black);
-            color: var(--white);
+            font-family: var(--font-body);
+            background-color: var(--bg-black);
+            color: var(--text-white);
             line-height: 1.6;
             overflow-x: hidden;
         }
 
-        h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 1px; }
+        h1, h2, h3, h4, .font-display {
+            font-family: var(--font-display);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
 
         /* Navigation */
         nav {
             position: fixed;
-            top: 0; width: 100%;
-            background: rgba(10, 10, 10, 0.95);
+            top: 0;
+            width: 100%;
+            background: rgba(6, 7, 9, 0.85);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             z-index: 1000;
-            padding: 1.2rem 5%;
+            padding: 1.2rem 6%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid var(--border-subtle);
+            transition: var(--transition);
+        }
+
+        nav.scrolled {
+            padding: 0.9rem 6%;
+            background: rgba(6, 7, 9, 0.98);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
         .logo {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 2rem;
-            color: var(--white);
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            color: var(--text-white);
             text-decoration: none;
             letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
-        .logo span { color: var(--neon); }
+        .logo span {
+            color: var(--neon-volt);
+            text-shadow: 0 0 15px var(--neon-glow);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
 
         .nav-links {
             display: flex;
-            gap: 2.5rem;
+            gap: 2rem;
             list-style: none;
+            align-items: center;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: var(--muted);
+            color: var(--text-muted);
             font-weight: 600;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            transition: color 0.3s;
+            transition: var(--transition);
         }
 
-        .nav-links a:hover { color: var(--neon); }
+        .nav-links a:hover {
+            color: var(--neon-volt);
+        }
+
+        .nav-cta {
+            background: var(--neon-volt);
+            color: var(--bg-black) !important;
+            padding: 0.6rem 1.4rem;
+            border-radius: 4px;
+            font-weight: 800 !important;
+            font-size: 0.8rem !important;
+            letter-spacing: 1px !important;
+            transition: var(--transition);
+            box-shadow: 0 0 15px var(--neon-glow);
+        }
+
+        .nav-cta:hover {
+            background: #FFFFFF;
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+        }
+
+        /* Language Switcher */
+        .lang-switch {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-subtle);
+            border-radius: 30px;
+            padding: 3px;
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.35rem 0.8rem;
+            border-radius: 20px;
+            color: var(--text-muted);
+            transition: var(--transition);
+        }
+
+        .lang-btn.active {
+            background: var(--neon-volt);
+            color: var(--bg-black);
+            box-shadow: 0 0 10px var(--neon-glow);
+        }
 
         .hamburger {
             display: none;
             flex-direction: column;
-            gap: 5px;
+            gap: 6px;
             cursor: pointer;
             background: none;
             border: none;
         }
 
         .hamburger span {
-            width: 28px; height: 2px;
-            background: var(--white);
+            width: 28px;
+            height: 2px;
+            background: var(--text-white);
             transition: 0.3s;
         }
 
-        /* Hero */
+        /* Hero Video Section */
         .hero {
-            min-height: 100vh;
-            background: linear-gradient(rgba(10,10,10,0.7), rgba(10,10,10,0.9)),
-                        url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1920&q=80') center/cover;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 8rem 5% 4rem;
             position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8rem 6% 4rem;
+            overflow: hidden;
+            background: var(--bg-black);
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            z-index: 1;
+            opacity: 0.6;
+            filter: brightness(0.75) contrast(1.1);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(6, 7, 9, 0.35) 0%, rgba(6, 7, 9, 0.9) 90%);
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            max-width: 900px;
         }
 
         .hero-tag {
-            display: inline-block;
-            padding: 0.5rem 1.5rem;
-            border: 1px solid var(--neon);
-            color: var(--neon);
-            font-size: 0.75rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.5rem 1.6rem;
+            border: 1px solid var(--neon-volt);
+            color: var(--neon-volt);
+            font-size: 0.8rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 3px;
             margin-bottom: 2rem;
             border-radius: 50px;
+            background: rgba(204, 255, 0, 0.05);
+            backdrop-filter: blur(10px);
         }
 
         .hero h1 {
-            font-size: clamp(3.5rem, 10vw, 7rem);
+            font-size: clamp(3.8rem, 8.5vw, 7.5rem);
             line-height: 0.95;
             margin-bottom: 1.5rem;
-            text-transform: uppercase;
         }
 
-        .hero h1 span { color: var(--neon); }
+        .hero h1 span {
+            color: var(--neon-volt);
+            text-shadow: 0 0 30px var(--neon-glow);
+        }
 
         .hero p {
-            color: var(--muted);
+            color: #D1D5DB;
             font-size: 1.2rem;
-            max-width: 600px;
-            margin-bottom: 2.5rem;
-            font-weight: 300;
+            max-width: 650px;
+            margin: 0 auto 3rem;
+            font-weight: 400;
+        }
+
+        .hero-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
         }
 
         .btn {
-            display: inline-block;
-            padding: 1.2rem 3rem;
-            background: var(--neon);
-            color: var(--black);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 1.2rem 2.8rem;
+            background: var(--neon-volt);
+            color: var(--bg-black);
             text-decoration: none;
             font-weight: 800;
             font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            transition: all 0.3s;
-            border: 2px solid var(--neon);
+            border-radius: 4px;
+            transition: var(--transition);
+            border: 2px solid var(--neon-volt);
         }
 
         .btn:hover {
             background: transparent;
-            color: var(--neon);
-            box-shadow: 0 0 30px rgba(204,255,0,0.3);
+            color: var(--neon-volt);
+            box-shadow: 0 0 30px var(--neon-glow);
+            transform: translateY(-3px);
         }
 
         .btn-outline {
             background: transparent;
-            color: var(--neon);
-            margin-left: 1rem;
-            border-color: rgba(204,255,0,0.4);
+            color: var(--text-white);
+            border-color: rgba(255, 255, 255, 0.25);
         }
 
         .btn-outline:hover {
-            background: var(--neon);
-            color: var(--black);
-            box-shadow: 0 0 30px rgba(204,255,0,0.3);
-        }
-
-        /* Sections */
-        section { padding: 6rem 5%; max-width: 1200px; margin: 0 auto; }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .section-header h2 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-        }
-
-        .section-header h2 span { color: var(--neon); }
-
-        .section-header p {
-            color: var(--muted);
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--text-white);
+            color: var(--text-white);
+            box-shadow: none;
         }
 
         /* Stats Bar */
         .stats-bar {
-            background: var(--dark);
-            padding: 4rem 5%;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            background: var(--bg-surface);
+            padding: 4rem 6%;
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
+            position: relative;
+            z-index: 10;
         }
 
         .stats-grid {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -203,33 +321,74 @@
             text-align: center;
         }
 
-        .stat h3 {
-            font-size: 3rem;
-            color: var(--neon);
-            font-family: 'Bebas Neue', sans-serif;
+        .stat-card .stat-number {
+            font-size: 3.8rem;
+            color: var(--neon-volt);
+            font-family: var(--font-display);
+            margin-bottom: 0.2rem;
+            text-shadow: 0 0 20px var(--neon-glow);
         }
 
-        .stat p {
-            color: var(--muted);
+        .stat-card p {
+            color: var(--text-muted);
             font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             font-weight: 600;
         }
 
-        /* Programs */
+        /* Section Global */
+        section {
+            padding: 7rem 6%;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4.5rem;
+        }
+
+        .section-tag {
+            color: var(--neon-volt);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            display: block;
+            margin-bottom: 0.8rem;
+        }
+
+        .section-header h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-header h2 span {
+            color: var(--neon-volt);
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Programs Grid */
         .programs-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
         }
 
         .program-card {
-            background: var(--gray);
-            padding: 3rem 2rem;
-            border-radius: 4px;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: all 0.3s;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            padding: 3.5rem 2.5rem;
+            border-radius: 8px;
+            backdrop-filter: blur(12px);
+            transition: var(--transition);
             position: relative;
             overflow: hidden;
         }
@@ -237,601 +396,1087 @@
         .program-card::before {
             content: '';
             position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 3px;
-            background: var(--neon);
-            transform: scaleX(0);
-            transition: transform 0.3s;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(400px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(204, 255, 0, 0.08), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
         }
 
-        .program-card:hover::before { transform: scaleX(1); }
+        .program-card:hover::before {
+            opacity: 1;
+        }
+
         .program-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(204,255,0,0.2);
+            transform: translateY(-8px);
+            border-color: rgba(204, 255, 0, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
 
-        .program-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
+        .program-icon-box {
+            width: 60px;
+            height: 60px;
+            background: rgba(204, 255, 0, 0.1);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            color: var(--neon-volt);
+            font-size: 1.8rem;
         }
 
         .program-card h3 {
-            font-size: 1.8rem;
+            font-size: 2rem;
             margin-bottom: 1rem;
-            text-transform: uppercase;
         }
 
         .program-card p {
-            color: var(--muted);
+            color: var(--text-muted);
             font-size: 0.95rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            line-height: 1.7;
         }
 
         .program-link {
-            color: var(--neon);
+            color: var(--neon-volt);
             text-decoration: none;
             font-weight: 700;
             font-size: 0.85rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
+            transition: gap 0.3s;
         }
 
-        /* About */
-        .about-section { background: var(--dark); }
+        .program-link:hover {
+            gap: 1rem;
+        }
+
+        /* About Section */
+        .about-wrap {
+            background: var(--bg-surface);
+            border-radius: 12px;
+            border: 1px solid var(--border-subtle);
+            padding: 5rem 6%;
+            margin: 0 auto;
+        }
 
         .about-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1.1fr;
             gap: 5rem;
             align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 6rem 5%;
         }
 
-        .about-img {
+        .about-img-box {
             position: relative;
         }
 
-        .about-img img {
+        .about-img-box img {
             width: 100%;
-            border-radius: 4px;
-            filter: grayscale(30%) contrast(1.1);
+            border-radius: 8px;
+            filter: grayscale(20%) contrast(1.1);
+            display: block;
         }
 
-        .about-img::after {
-            content: '';
+        .about-badge {
             position: absolute;
-            top: 20px; left: 20px;
-            width: 100%; height: 100%;
-            border: 2px solid var(--neon);
-            border-radius: 4px;
-            z-index: -1;
-            opacity: 0.5;
+            bottom: -20px;
+            right: -20px;
+            background: var(--bg-black);
+            border: 1px solid var(--neon-volt);
+            padding: 1.5rem 2rem;
+            border-radius: 6px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        .about-badge strong {
+            display: block;
+            font-size: 2.2rem;
+            color: var(--neon-volt);
+            font-family: var(--font-display);
+            line-height: 1;
+        }
+
+        .about-badge span {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
         }
 
         .about-text h2 {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
+            font-size: 3.2rem;
+            line-height: 1.1;
+            margin-bottom: 1.8rem;
         }
-
-        .about-text h2 span { color: var(--neon); }
 
         .about-text p {
-            color: var(--muted);
+            color: var(--text-muted);
             margin-bottom: 1.5rem;
+            font-size: 1.05rem;
         }
 
-        .about-features {
-            margin-top: 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
+        .features-list {
+            margin-top: 2.5rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
         }
 
-        .feature {
+        .feature-item {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            font-weight: 600;
-            color: var(--white);
-            text-transform: uppercase;
+            gap: 12px;
+            font-weight: 700;
+            color: var(--text-white);
             font-size: 0.9rem;
+            text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        .feature::before {
-            content: '▸';
-            color: var(--neon);
-            font-size: 1.2rem;
+        .feature-item i {
+            color: var(--neon-volt);
+            font-size: 1.1rem;
         }
 
-        /* Pricing */
+        /* Pricing Section */
         .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            align-items: center;
         }
 
         .pricing-card {
-            background: var(--gray);
-            padding: 3rem 2rem;
-            border-radius: 4px;
-            border: 1px solid rgba(255,255,255,0.05);
+            background: var(--bg-card);
+            padding: 3.5rem 2.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-subtle);
             text-align: center;
-            transition: all 0.3s;
-        }
-
-        .pricing-card.featured {
-            border: 2px solid var(--neon);
+            transition: var(--transition);
             position: relative;
         }
 
-        .pricing-card.featured::before {
-            content: 'PIÈ POPOLARE';
+        .pricing-card.featured {
+            border: 2px solid var(--neon-volt);
+            background: var(--bg-surface);
+            transform: scale(1.04);
+            box-shadow: 0 0 40px rgba(204, 255, 0, 0.15);
+        }
+
+        .featured-tag {
             position: absolute;
-            top: -12px; left: 50%;
+            top: -14px;
+            left: 50%;
             transform: translateX(-50%);
-            background: var(--neon);
-            color: var(--black);
-            padding: 0.3rem 1rem;
-            font-size: 0.7rem;
+            background: var(--neon-volt);
+            color: var(--bg-black);
+            padding: 0.35rem 1.2rem;
+            font-size: 0.75rem;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
+            border-radius: 20px;
         }
 
         .pricing-card h3 {
-            font-size: 1.5rem;
+            font-size: 2rem;
             margin-bottom: 0.5rem;
-            text-transform: uppercase;
         }
 
-        .price {
-            font-size: 3.5rem;
+        .price-box {
+            font-size: 4rem;
             font-weight: 800;
-            color: var(--white);
+            color: var(--text-white);
             margin: 1.5rem 0;
-            font-family: 'Inter', sans-serif;
+            font-family: var(--font-display);
+            letter-spacing: 1px;
         }
 
-        .price span {
-            font-size: 1rem;
-            color: var(--muted);
+        .price-box span {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            font-family: var(--font-body);
             font-weight: 400;
         }
 
         .pricing-card ul {
             list-style: none;
-            margin: 2rem 0;
+            margin: 2.5rem 0;
             text-align: left;
         }
 
         .pricing-card ul li {
-            padding: 0.8rem 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            color: var(--muted);
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-
-        .pricing-card ul li::before {
-            content: '✓';
-            color: var(--neon);
-            font-weight: 700;
-        }
-
-        .pricing-card .btn {
-            width: 100%;
-            margin: 0;
-        }
-
-        /* Testimonials */
-        .testimonials-section { background: var(--dark); }
-
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .testimonial {
-            background: var(--gray);
-            padding: 2.5rem;
-            border-radius: 4px;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .testimonial-stars {
-            color: var(--neon);
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            letter-spacing: 2px;
-        }
-
-        .testimonial p {
-            color: var(--muted);
-            font-style: italic;
-            margin-bottom: 1.5rem;
-            font-size: 1rem;
-            line-height: 1.8;
-        }
-
-        .testimonial-author {
+            padding: 0.9rem 0;
+            border-bottom: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+            font-size: 0.95rem;
             display: flex;
             align-items: center;
             gap: 1rem;
         }
 
-        .testimonial-author img {
-            width: 50px; height: 50px;
+        .pricing-card ul li i {
+            color: var(--neon-volt);
+        }
+
+        .pricing-card .btn {
+            width: 100%;
+        }
+
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--bg-card);
+            padding: 3rem 2.2rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-subtle);
+            position: relative;
+        }
+
+        .stars {
+            color: var(--neon-volt);
+            font-size: 1.1rem;
+            margin-bottom: 1.2rem;
+            letter-spacing: 2px;
+        }
+
+        .testimonial-card p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .author-box {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        .author-box img {
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid var(--neon);
+            border: 2px solid var(--neon-volt);
         }
 
-        .testimonial-author strong {
+        .author-box strong {
             display: block;
-            color: var(--white);
-            font-size: 0.95rem;
+            color: var(--text-white);
+            font-size: 1.05rem;
         }
 
-        .testimonial-author span {
-            color: var(--muted);
+        .author-box span {
+            color: var(--neon-volt);
             font-size: 0.8rem;
-        }
-
-        /* CTA Section */
-        .cta-section {
-            background: linear-gradient(rgba(10,10,10,0.9), rgba(10,10,10,0.9)),
-                        url('https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=1920&q=80') center/cover;
-            text-align: center;
-            padding: 8rem 5%;
-            background-attachment: fixed;
-        }
-
-        .cta-section h2 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .cta-section h2 span { color: var(--neon); }
+        /* Booking CTA Form Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-black) 100%);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 5rem 6%;
+            margin: 4rem auto;
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 5rem;
+            align-items: center;
+        }
 
-        .cta-section p {
-            color: var(--muted);
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto 2.5rem;
+        .cta-text h2 {
+            font-size: 3.5rem;
+            line-height: 1.05;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-text p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .booking-form {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            padding: 3rem;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 1.1rem;
+            background: var(--bg-black);
+            border: 1px solid var(--border-subtle);
+            border-radius: 4px;
+            color: var(--text-white);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--neon-volt);
+            box-shadow: 0 0 15px var(--neon-glow);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--neon-volt);
+            color: var(--bg-black);
+            border: none;
+            border-radius: 4px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: var(--transition);
+        }
+
+        .submit-btn:hover {
+            background: #FFFFFF;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px);
         }
 
         /* Footer */
         footer {
-            background: var(--black);
-            border-top: 1px solid rgba(255,255,255,0.05);
+            background: var(--bg-surface);
+            border-top: 1px solid var(--border-subtle);
+            padding: 5rem 6% 3rem;
             text-align: center;
-            padding: 4rem 2rem;
         }
 
-        .footer-info {
-            display: flex;
-            justify-content: center;
-            gap: 4rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto 3.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 3rem;
+            text-align: left;
         }
 
-        .footer-info div strong {
+        .footer-col strong {
             display: block;
-            color: var(--neon);
-            font-size: 0.8rem;
+            color: var(--neon-volt);
+            font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.8rem;
         }
 
-        .footer-info div {
-            color: var(--muted);
-            font-size: 0.9rem;
+        .footer-col p, .footer-col a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            line-height: 1.8;
         }
 
-        footer p {
-            color: var(--muted);
+        .copyright {
+            color: var(--text-muted);
             font-size: 0.8rem;
-            margin-top: 2rem;
-            opacity: 0.5;
+            opacity: 0.6;
+            border-top: 1px solid var(--border-subtle);
+            padding-top: 2rem;
         }
 
-        /* Mobile */
+        /* Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 992px) {
+            .about-grid, .cta-section {
+                grid-template-columns: 1fr;
+                gap: 3.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2.5rem;
+            }
+
+            .pricing-card.featured {
+                transform: none;
+            }
+        }
+
         @media (max-width: 768px) {
             .nav-links {
                 position: fixed;
-                top: 70px; right: -100%;
+                top: 75px;
+                right: -100%;
                 width: 100%;
-                height: calc(100vh - 70px);
-                background: var(--black);
+                height: calc(100vh - 75px);
+                background: var(--bg-black);
                 flex-direction: column;
                 align-items: center;
                 padding-top: 3rem;
-                transition: right 0.3s;
+                transition: right 0.4s ease;
             }
 
-            .nav-links.active { right: 0; }
+            .nav-links.active {
+                right: 0;
+            }
 
-            .hamburger { display: flex; }
+            .hamburger {
+                display: flex;
+            }
 
-            .hero { padding-top: 100px; }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
 
-            .btn-outline { margin-left: 0; margin-top: 1rem; }
-
-            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
-
-            .about-grid { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 5%; }
-
-            .about-img::after { display: none; }
-
-            section { padding: 4rem 5%; }
-
-            .cta-section h2 { font-size: 2.5rem; }
+            .features-list {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
 
-    <nav>
+    <!-- Navigation Bar -->
+    <nav id="navbar">
         <a href="#" class="logo">Iron <span>Lab</span></a>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#programmi">Programmi</a></li>
-            <li><a href="#chi-siamo">Chi Siamo</a></li>
-            <li><a href="#prezzi">Prezzi</a></li>
-            <li><a href="#contatti">Contatti</a></li>
-        </ul>
-        <button class="hamburger" id="hamburger" aria-label="Menu">
-            <span></span><span></span><span></span>
-        </button>
+        <div class="nav-right">
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" data-key="nav_home">Home</a></li>
+                <li><a href="#programmi" data-key="nav_programs">Programmi</a></li>
+                <li><a href="#club" data-key="nav_club">Il Club</a></li>
+                <li><a href="#prezzi" data-key="nav_pricing">Membership</a></li>
+                <li><a href="#prenota" class="nav-cta" data-key="nav_cta">Prova Gratuita</a></li>
+            </ul>
+            <div class="lang-switch">
+                <button class="lang-btn active" data-lang="it" onclick="setLanguage('it')">IT</button>
+                <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
+            </div>
+            <button class="hamburger" id="hamburger" aria-label="Toggle Navigation">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
     </nav>
 
+    <!-- Hero Video Section (مدمج به فيديو gym-video.mp4) -->
     <section class="hero" id="home">
-        <div class="hero-tag">Palestra e Personal Training</div>
-        <h1>Trasforma il Tuo <span>Corpo</span></h1>
-        <p>Allenamenti personalizzati, attrezzatura professionale e un team di esperti pronti a spingerti oltre i tuoi limiti. La tua trasformazione inizia oggi.</p>
-        <div>
-            <a href="#contatti" class="btn">Prova Gratuita</a>
-            <a href="#programmi" class="btn btn-outline">Scopri i Programmi</a>
+        <video autoplay muted loop playsinline class="hero-video">
+            <source src="gym-video.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-tag">
+                <i class="fa-solid fa-bolt"></i> <span data-key="hero_tag">Milano Porta Nuova – Performance Club</span>
+            </div>
+            <h1 data-key="hero_title">Forgia la Tua <span>Potenza</span></h1>
+            <p data-key="hero_desc">Attrezzature d'élite Technogym Biostrength, coaching personalizzato one-to-one e un'atmosfera esclusiva a Milano pensata per superare ogni limite.</p>
+            <div class="hero-actions">
+                <a href="#prenota" class="btn" data-key="hero_btn1">Richiedi Pass Prova <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="#programmi" class="btn btn-outline" data-key="hero_btn2">Scopri i Programmi</a>
+            </div>
         </div>
     </section>
 
+    <!-- Stats Bar -->
     <div class="stats-bar">
         <div class="stats-grid">
-            <div class="stat">
-                <h3>500+</h3>
-                <p>Atleti Soddisfatti</p>
+            <div class="stat-card">
+                <div class="stat-number" data-target="1200">0</div>
+                <p data-key="stat_sqm">Mq di Spazio Esclusivo</p>
             </div>
-            <div class="stat">
-                <h3>8</h3>
-                <p>Anni di Esperienza</p>
+            <div class="stat-card">
+                <div class="stat-number" data-target="15">0</div>
+                <p data-key="stat_coaches">Master Coach Certificati</p>
             </div>
-            <div class="stat">
-                <h3>15</h3>
-                <p>Trainer Certificati</p>
+            <div class="stat-card">
+                <div class="stat-number" data-target="99">0</div>
+                <p data-key="stat_rate">% Tasso di Successo</p>
             </div>
-            <div class="stat">
-                <h3>24/7</h3>
-                <p>Apertura H24</p>
+            <div class="stat-card">
+                <div class="stat-number" data-target="24">0</div>
+                <p data-key="stat_hours">Accesso H24 & VIP Concierge</p>
             </div>
         </div>
     </div>
 
+    <!-- Programs Section -->
     <section id="programmi">
-        <div class="section-header">
-            <h2>I Nostri <span>Programmi</span></h2>
-            <p>Scegli il percorso più adatto ai tuoi obiettivi. Dal principiante all'atleta avanzato.</p>
+        <div class="section-header reveal">
+            <span class="section-tag" data-key="prog_tag">I Nostri Percorsi</span>
+            <h2 data-key="prog_title">Programmi di <span>Alto Livello</span></h2>
+            <p data-key="prog_desc">Protocolli di allenamento scientifici calibrati per atleti, professionisti e appassionati di fitness.</p>
         </div>
+
         <div class="programs-grid">
-            <div class="program-card">
-                <div class="program-icon">💪</div>
-                <h3>Personal Training</h3>
-                <p>Schede personalizzate one-to-one con i nostri trainer certificati. Monitoraggio costante dei progressi e adattamento del programma.</p>
-                <a href="#contatti" class="program-link">Scopri di più →</a>
+            <div class="program-card reveal">
+                <div class="program-icon-box"><i class="fa-solid fa-dumbbell"></i></div>
+                <h3 data-key="p1_title">Elite Personal Training</h3>
+                <p data-key="p1_desc">Sessioni one-to-one con analisi biomeccanica, monitoraggio biometrico continuo e programmazione su misura.</p>
+                <a href="#prenota" class="program-link" data-key="learn_more">Prenota Sessione →</a>
             </div>
-            <div class="program-card">
-                <div class="program-icon">🔥</div>
-                <h3>Functional Training</h3>
-                <p>Allenamento funzionale ad alta intensità per migliorare forza, resistenza e mobilità. Lezioni di gruppo energizzanti.</p>
-                <a href="#contatti" class="program-link">Scopri di più →</a>
+
+            <div class="program-card reveal" style="transition-delay: 0.1s;">
+                <div class="program-icon-box"><i class="fa-solid fa-fire-flame-curved"></i></div>
+                <h3 data-key="p2_title">Athletic Conditioning</h3>
+                <p data-key="p2_desc">High Intensity Interval Training focalizzato su potenza esplosiva, resistenza lattacida e conditioning per atleti.</p>
+                <a href="#prenota" class="program-link" data-key="learn_more">Prenota Sessione →</a>
             </div>
-            <div class="program-card">
-                <div class="program-icon">🥗</div>
-                <h3>Nutrizione Sportiva</h3>
-                <p>Piani alimentari su misura creati dal nostro nutrizionista. Integrazione, dieta e consulenza per massimizzare i risultati.</p>
-                <a href="#contatti" class="program-link">Scopri di più →</a>
+
+            <div class="program-card reveal" style="transition-delay: 0.2s;">
+                <div class="program-icon-box"><i class="fa-solid fa-apple-whole"></i></div>
+                <h3 data-key="p3_title">Nutrizione & Biohacking</h3>
+                <p data-key="p3_desc">Piani alimentari avanzati e integrazione mirata studiati dal nostro team di biologi nutrizionisti sportivi.</p>
+                <a href="#prenota" class="program-link" data-key="learn_more">Prenota Sessione →</a>
             </div>
-            <div class="program-card">
-                <div class="program-icon">🧘</div>
-                <h3>Yoga & Mobility</h3>
-                <p>Recupero, flessibilità e consapevolezza corporea. Lezioni di yoga, stretching e mobility per prevenire infortuni.</p>
-                <a href="#contatti" class="program-link">Scopri di più →</a>
+
+            <div class="program-card reveal" style="transition-delay: 0.1s;">
+                <div class="program-icon-box"><i class="fa-solid fa-weight-hanging"></i></div>
+                <h3 data-key="p4_title">Powerlifting & Strength</h3>
+                <p data-key="p4_desc">Pedane regolamentari Eleiko, bilancieri calibrati e coaching specialistico per lo sviluppo massimale della forza.</p>
+                <a href="#prenota" class="program-link" data-key="learn_more">Prenota Sessione →</a>
             </div>
-            <div class="program-card">
-                <div class="program-icon">🏋️</div>
-                <h3>Powerlifting</h3>
-                <p>Area dedicata con bilancieri, piatti competition e piattaforme. Ideale per chi vuole spingere sul massimale.</p>
-                <a href="#contatti" class="program-link">Scopri di più →</a>
+
+            <div class="program-card reveal" style="transition-delay: 0.2s;">
+                <div class="program-icon-box"><i class="fa-solid fa-spa"></i></div>
+                <h3 data-key="p5_title">Recovery & Cryo Lounge</h3>
+                <p data-key="p5_desc">Sauna finlandese, crioterapia e sedute di mobilità articolare per accelerare il recupero neurale e muscolare.</p>
+                <a href="#prenota" class="program-link" data-key="learn_more">Prenota Sessione →</a>
             </div>
-            <div class="program-card">
-                <div class="program-icon">⚡</div>
-                <h3>HIIT & Cardio</h3>
-                <p>Sessioni ad alta intensità per bruciare grasso e migliorare la resistenza cardiovascolare. Risultati visibili in poche settimane.</p>
-                <a href="#contatti" class="program-link">Scopri di più →</a>
+
+            <div class="program-card reveal" style="transition-delay: 0.3s;">
+                <div class="program-icon-box"><i class="fa-solid fa-heart-pulse"></i></div>
+                <h3 data-key="p6_title">Cardio Endurance Lab</h3>
+                <p data-key="p6_desc">Skillrun, Skillrow e monitoraggio cardiaco in tempo reale per ottimizzare soglia anaerobica e VO2 Max.</p>
+                <a href="#prenota" class="program-link" data-key="learn_more">Prenota Sessione →</a>
             </div>
         </div>
     </section>
 
-    <section class="about-section" id="chi-siamo">
-        <div class="about-grid">
-            <div class="about-img">
-                <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=800&q=80" alt="Trainer in palestra">
-            </div>
-            <div class="about-text">
-                <h2>Non è Solo una <span>Palestra</span></h2>
-                <p>Iron Lab nasce dalla convinzione che l'allenamento sia una scienza, non un'improvvisazione. Ogni membro del nostro staff è certificato ISSA, NASM o ACE.</p>
-                <p>La nostra struttura di 800mq è equipaggiata con macchinari Technogym, Rogue Fitness e Hammer Strength. Nessuna attesa, nessuna scusa.</p>
-                <p>Qui non trovi giudizi. Trovi una tribù di persone che, come te, vogliono diventare la versione migliore di sé stessi.</p>
-                <div class="about-features">
-                    <div class="feature">Attrezzatura Professionale</div>
-                    <div class="feature">Spogliatoi con Sauna</div>
-                    <div class="feature">Parcheggio Gratuito</div>
-                    <div class="feature">WiFi e Aria Condizionata</div>
+    <!-- Club Section -->
+    <section id="club">
+        <div class="about-wrap reveal">
+            <div class="about-grid">
+                <div class="about-img-box">
+                    <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=800&q=80" alt="Iron Lab Club Milano">
+                    <div class="about-badge">
+                        <strong>MILANO</strong>
+                        <span>Porta Nuova District</span>
+                    </div>
+                </div>
+
+                <div class="about-text">
+                    <span class="section-tag" data-key="about_tag">L'Esperienza Iron Lab</span>
+                    <h2 data-key="about_title">Scienza dell'Allenamento nel Cuore di <span>Milano</span></h2>
+                    <p data-key="about_p1">Iron Lab ridefinisce gli standard del fitness in Italia. Con uno spazio di oltre 1.200 mq nel distretto dell'innovazione a Milano, offriamo un ambiente ad alte prestazioni riservato a chi cerca solo l'eccellenza.</p>
+                    <p data-key="about_p2">Macchinari Technogym Biostrength a intelligenza artificiale, spogliatoi executive in marmo e legno con docce sensoriali, e un lounge bar per shake proteici personalizzati.</p>
+                    
+                    <div class="features-list">
+                        <div class="feature-item"><i class="fa-solid fa-circle-check"></i> <span data-key="feat_1">Technogym Artis & Eleiko</span></div>
+                        <div class="feature-item"><i class="fa-solid fa-circle-check"></i> <span data-key="feat_2">Accesso Riservato H24</span></div>
+                        <div class="feature-item"><i class="fa-solid fa-circle-check"></i> <span data-key="feat_3">Executive Spa & Sauna</span></div>
+                        <div class="feature-item"><i class="fa-solid fa-circle-check"></i> <span data-key="feat_4">Parcheggio Privato Valet</span></div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Pricing Section -->
     <section id="prezzi">
-        <div class="section-header">
-            <h2>Scegli il Tuo <span>Piano</span></h2>
-            <p>Nessun vincolo, nessuna sorpresa. Scegli ciò che fa per te.</p>
+        <div class="section-header reveal">
+            <span class="section-tag" data-key="price_tag">Quote & Abbonamenti</span>
+            <h2 data-key="price_title">Scegli la Tua <span>Membership</span></h2>
+            <p data-key="price_desc">Nessuna quota nascosta. Accesso a servizi premium calibrati sui tuoi obiettivi.</p>
         </div>
+
         <div class="pricing-grid">
-            <div class="pricing-card">
-                <h3>Base</h3>
-                <div class="price">€39<span>/mese</span></div>
+            <div class="pricing-card reveal">
+                <h3 data-key="plan1_title">Club Access</h3>
+                <div class="price-box">€89<span data-key="per_month">/mese</span></div>
                 <ul>
-                    <li>Accesso sala pesi H24</li>
-                    <li>Spogliatoi e sauna</li>
-                    <li>WiFi gratuito</li>
-                    <li>1 consulenza mensile</li>
+                    <li><i class="fa-solid fa-check"></i> <span data-key="plan1_1">Accesso illimitato sala pesi H24</span></li>
+                    <li><i class="fa-solid fa-check"></i> <span data-key="plan1_2">Executive Locker Room & Sauna</span></li>
+                    <li><i class="fa-solid fa-check"></i> <span data-key="plan1_3">Analisi composizione corporea BIA</span></li>
+                    <li><i class="fa-solid fa-check"></i> <span data-key="plan1_4">App Iron Lab con tracking schede</span></li>
                 </ul>
-                <a href="#contatti" class="btn">Inizia Ora</a>
+                <a href="#prenota" class="btn btn-outline" data-key="choose_plan">Scegli Piano</a>
             </div>
-            <div class="pricing-card featured">
-                <h3>Pro</h3>
-                <div class="price">€69<span>/mese</span></div>
+
+            <div class="pricing-card featured reveal" style="transition-delay: 0.1s;">
+                <span class="featured-tag" data-key="featured_label">Più Richiesto</span>
+                <h3 data-key="plan2_title">Performance Pro</h3>
+                <div class="price-box">€149<span data-key="per_month">/mese</span></div>
                 <ul>
-                    <li>Tutto del piano Base</li>
-                    <li>4 sessioni personal training</li>
-                    <li>Accesso classi di gruppo</li>
-                    <li>Piano nutrizionale base</li>
-                    <li>Parcheggio riservato</li>
+                    <li><i class="fa-solid fa-check"></i> <span data-key="plan2_1">Tutti i vantaggi Club Access</span></li>
+                    <li><i class="fa-solid fa-check"></i> <span data-key="plan2_2">4 Sessioni Personal Training / mese</span></li>
+                    <li><i class="fa-solid fa-check"></i> <span data-key="plan2_3">Accesso a tutti i corsi Athletic HIIT</span></li>
+                    <li><i class="fa-solid fa-check"></i> <span data-key="plan2_4">Piano nutrizionale periodico</span></li>
+                    <li><i class="fa-solid fa-check"></i> <span data-key="plan2_5">Parcheggio riservato</span></li>
                 </ul>
-                <a href="#contatti" class="btn">Inizia Ora</a>
+                <a href="#prenota" class="btn" data-key="choose_plan">Scegli Piano</a>
             </div>
-            <div class="pricing-card">
-                <h3>Elite</h3>
-                <div class="price">€99<span>/mese</span></div>
+
+            <div class="pricing-card reveal" style="transition-delay: 0.2s;">
+                <h3 data-key="plan3_title">Black VIP</h3>
+                <div class="price-box">€249<span data-key="per_month">/mese</span></div>
                 <ul>
-                    <li>Tutto del piano Pro</li>
-                    <li>Personal training illimitato</li>
-                    <li>Nutrizionista dedicato</li>
-                    <li>Recupero e mobility</li>
-                    <li>Accesso VIP area</li>
+                    <li><i class="fa-solid fa-check"></i> <span data-key="plan3_1">Personal Training illimitato one-to-one</span></li>
+                    <li><i class="fa-solid fa-check"></i> <span data-key="plan3_2">Nutrizionista e Osteopata dedicato</span></li>
+                    <li><i class="fa-solid fa-check"></i> <span data-key="plan3_3">Accesso illimitato Cryo & Spa Lounge</span></li>
+                    <li><i class="fa-solid fa-check"></i> <span data-key="plan3_4">Servizio lavanderia kit sportivo</span></li>
                 </ul>
-                <a href="#contatti" class="btn">Inizia Ora</a>
+                <a href="#prenota" class="btn btn-outline" data-key="choose_plan">Scegli Piano</a>
             </div>
         </div>
     </section>
 
-    <section class="testimonials-section">
-        <div class="section-header">
-            <h2>Cosa Dicono i <span>Nostri Atleti</span></h2>
-            <p>Risultati reali, persone reali.</p>
+    <!-- Testimonials -->
+    <section>
+        <div class="section-header reveal">
+            <span class="section-tag" data-key="test_tag">Testimonianze</span>
+            <h2 data-key="test_title">Cosa Dicono i Nostri <span>Atleti</span></h2>
+            <p data-key="test_desc">Esperienze autentiche di chi ha trasformato le proprie prestazioni nel nostro club.</p>
         </div>
+
         <div class="testimonials-grid">
-            <div class="testimonial">
-                <div class="testimonial-stars">★★★★★</div>
-                <p>"In 6 mesi ho perso 18kg e ho trovato una seconda famiglia. I trainer non ti lasciano mai da solo, anche nei giorni più difficili."</p>
-                <div class="testimonial-author">
+            <div class="testimonial-card reveal">
+                <div class="stars">★★★★★</div>
+                <p data-key="t1_text">"Ambiente di livello assoluto. Macchinari Biostrength incredibili e trainer che sanno esattamente come farti esprimere il massimo potenziale."</p>
+                <div class="author-box">
                     <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80" alt="Marco">
                     <div>
-                        <strong>Marco Bianchi</strong>
-                        <span>Membro da 2 anni</span>
+                        <strong>Marco S.</strong>
+                        <span data-key="t1_role">Imprenditore – Milano</span>
                     </div>
                 </div>
             </div>
-            <div class="testimonial">
-                <div class="testimonial-stars">★★★★★</div>
-                <p>"Dopo anni di palestre commerciali, qui ho finalmente trovato serietà. Attrezzatura top, nessuna coda e un'atmosfera che spinge a dare il massimo."</p>
-                <div class="testimonial-author">
+
+            <div class="testimonial-card reveal" style="transition-delay: 0.1s;">
+                <div class="stars">★★★★★</div>
+                <p data-key="t2_text">"La cura dei dettagli, dalla pulizia maniacale alla SPA post-allenamento, rende Iron Lab la miglior palestra di Milano senza paragoni."</p>
+                <div class="author-box">
                     <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80" alt="Giulia">
                     <div>
-                        <strong>Giulia Rossi</strong>
-                        <span>Membro da 1 anno</span>
+                        <strong>Giulia R.</strong>
+                        <span data-key="t2_role">Fashion Director</span>
                     </div>
                 </div>
             </div>
-            <div class="testimonial">
-                <div class="testimonial-stars">★★★★★</div>
-                <p>"Il piano nutrizionale mi ha cambiato la vita. Non solo ho aumentato la massa muscolare, ma ho imparato a mangiare senza privazioni."</p>
-                <div class="testimonial-author">
+
+            <div class="testimonial-card reveal" style="transition-delay: 0.2s;">
+                <div class="stars">★★★★★</div>
+                <p data-key="t3_text">"Il programma combinato con nutrizionista e personal trainer mi ha permesso di raggiungere una forma fisica che non credevo possibile a 40 anni."</p>
+                <div class="author-box">
                     <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&q=80" alt="Andrea">
                     <div>
-                        <strong>Andrea Verdi</strong>
-                        <span>Membro da 8 mesi</span>
+                        <strong>Andrea V.</strong>
+                        <span data-key="t3_role">Consulente Finanziario</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="cta-section" id="contatti">
-        <h2>La Tua Trasformazione <span>Inizia Oggi</span></h2>
-        <p>Prima lezione e consulenza fitness completamente gratuite. Nessun impegno, nessuna scusa.</p>
-        <a href="#" class="btn" onclick="event.preventDefault(); alert('Grazie! Ti contatteremo entro 24 ore per fissare la tua prova gratuita.');">Prenota la Prova Gratuita</a>
+    <!-- Booking CTA Form Section -->
+    <section id="prenota">
+        <div class="cta-section reveal">
+            <div class="cta-text">
+                <span class="section-tag" data-key="form_tag">Inizia la Trasformazione</span>
+                <h2 data-key="form_title">Prenota la Tua Sessione di Prova <span>VIP</span></h2>
+                <p data-key="form_desc">Compila il modulo per riservare un pass giornaliero gratuito con consulenza biometrica e tour della struttura con un nostro Head Coach.</p>
+            </div>
+
+            <form class="booking-form" onsubmit="event.preventDefault(); alert(currentLang === 'it' ? 'Richiesta ricevuta con successo! Il nostro concierge ti contatterà per confermare il tuo pass VIP.' : 'Request received successfully! Our concierge will contact you to confirm your VIP pass.');">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label data-key="lbl_name">Nome</label>
+                        <input type="text" id="inp_name" placeholder="Alessandro" required>
+                    </div>
+                    <div class="form-group">
+                        <label data-key="lbl_surname">Cognome</label>
+                        <input type="text" id="inp_surname" placeholder="Moretti" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label data-key="lbl_email">Email</label>
+                    <input type="email" placeholder="alessandro.moretti@email.it" required>
+                </div>
+                <div class="form-group">
+                    <label data-key="lbl_phone">Telefono</label>
+                    <input type="tel" placeholder="+39 340 000 0000" required>
+                </div>
+                <div class="form-group">
+                    <label data-key="lbl_goal">Obiettivo Principale</label>
+                    <select required id="sel_goal">
+                        <option value="" data-key="opt_0">Seleziona obiettivo...</option>
+                        <option data-key="opt_1">Ipertrofia & Forza Massimale</option>
+                        <option data-key="opt_2">Dimagrimento & Tonificazione</option>
+                        <option data-key="opt_3">Condizionamento Atletico</option>
+                        <option data-key="opt_4">Recovery & Benessere Generale</option>
+                    </select>
+                </div>
+                <button type="submit" class="submit-btn" data-key="btn_submit">Richiedi Pass Giornaliero</button>
+            </form>
+        </div>
     </section>
 
+    <!-- Footer -->
     <footer>
-        <div class="footer-info">
-            <div>
-                <strong>Indirizzo</strong>
-                Via dello Sport 88, 00100 Roma
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo" style="margin-bottom: 1rem;">Iron <span>Lab</span></div>
+                <p data-key="foot_desc">Il performance club di riferimento per chi esige il massimo dal proprio potenziale fisico.</p>
             </div>
-            <div>
-                <strong>Telefono</strong>
-                +39 06 987 6543
+            <div class="footer-col">
+                <strong data-key="foot_loc">Sede Milano</strong>
+                <p>Via Melchiorre Gioia 45<br>20124 Milano (MI) — Distretto Porta Nuova</p>
             </div>
-            <div>
-                <strong>Email</strong>
-                info@ironlab.it
+            <div class="footer-col">
+                <strong data-key="foot_contact">Contatti</strong>
+                <p>Tel: +39 02 8900 1234<br>Email: milano@ironlab.it</p>
             </div>
-            <div>
-                <strong>Orari</strong>
-                H24 – 7 giorni su 7
+            <div class="footer-col">
+                <strong data-key="foot_hours">Orari di Apertura</strong>
+                <p data-key="hours_val">Membri: H24 / 7 Giorni su 7<br>Concierge: Lun–Ven 07:00 – 22:00</p>
             </div>
         </div>
-        <p>© 2026 Iron Lab. Sito dimostrativo per portfolio.</p>
+        <div class="copyright" data-key="copyright_text">
+            © 2026 Iron Lab Milano. Tutti i diritti riservati. Progetto realizzato per portfolio.
+        </div>
     </footer>
 
+    <!-- Interactive Scripts & Multilingual Engine -->
     <script>
-        // Mobile menu
+        const translations = {
+            it: {
+                nav_home: "Home",
+                nav_programs: "Programmi",
+                nav_club: "Il Club",
+                nav_pricing: "Membership",
+                nav_cta: "Prova Gratuita",
+                hero_tag: "Milano Porta Nuova – Performance Club",
+                hero_title: "Forgia la Tua <span>Potenza</span>",
+                hero_desc: "Attrezzature d'élite Technogym Biostrength, coaching personalizzato one-to-one e un'atmosfera esclusiva a Milano pensata per superare ogni limite.",
+                hero_btn1: "Richiedi Pass Prova",
+                hero_btn2: "Scopri i Programmi",
+                stat_sqm: "Mq di Spazio Esclusivo",
+                stat_coaches: "Master Coach Certificati",
+                stat_rate: "% Tasso di Successo",
+                stat_hours: "Accesso H24 & VIP Concierge",
+                prog_tag: "I Nostri Percorsi",
+                prog_title: "Programmi di <span>Alto Livello</span>",
+                prog_desc: "Protocolli di allenamento scientifici calibrati per atleti, professionisti e appassionati di fitness.",
+                p1_title: "Elite Personal Training",
+                p1_desc: "Sessioni one-to-one con analisi biomeccanica, monitoraggio biometrico continuo e programmazione su misura.",
+                p2_title: "Athletic Conditioning",
+                p2_desc: "High Intensity Interval Training focalizzato su potenza esplosiva, resistenza lattacida e conditioning per atleti.",
+                p3_title: "Nutrizione & Biohacking",
+                p3_desc: "Piani alimentari avanzati e integrazione mirata studiati dal nostro team di biologi nutrizionisti sportivi.",
+                p4_title: "Powerlifting & Strength",
+                p4_desc: "Pedane regolamentari Eleiko, bilancieri calibrati e coaching specialistico per lo sviluppo massimale della forza.",
+                p5_title: "Recovery & Cryo Lounge",
+                p5_desc: "Sauna finlandese, crioterapia e sedute di mobilità articolare per accelerare il recupero neurale e muscolare.",
+                p6_title: "Cardio Endurance Lab",
+                p6_desc: "Skillrun, Skillrow e monitoraggio cardiaco in tempo reale per ottimizzare soglia anaerobica e VO2 Max.",
+                learn_more: "Prenota Sessione →",
+                about_tag: "L'Esperienza Iron Lab",
+                about_title: "Scienza dell'Allenamento nel Cuore di <span>Milano</span>",
+                about_p1: "Iron Lab ridefinisce gli standard del fitness in Italia. Con uno spazio di oltre 1.200 mq nel distretto dell'innovazione a Milano, offriamo un ambiente ad alte prestazioni riservato a chi cerca solo l'eccellenza.",
+                about_p2: "Macchinari Technogym Biostrength a intelligenza artificiale, spogliatoi executive in marmo e legno con docce sensoriali, e un lounge bar per shake proteici personalizzati.",
+                feat_1: "Technogym Artis & Eleiko",
+                feat_2: "Accesso Riservato H24",
+                feat_3: "Executive Spa & Sauna",
+                feat_4: "Parcheggio Privato Valet",
+                price_tag: "Quote & Abbonamenti",
+                price_title: "Scegli la Tua <span>Membership</span>",
+                price_desc: "Nessuna quota nascosta. Accesso a servizi premium calibrati sui tuoi obiettivi.",
+                plan1_title: "Club Access",
+                plan1_1: "Accesso illimitato sala pesi H24",
+                plan1_2: "Executive Locker Room & Sauna",
+                plan1_3: "Analisi composizione corporea BIA",
+                plan1_4: "App Iron Lab con tracking schede",
+                plan2_title: "Performance Pro",
+                plan2_1: "Tutti i vantaggi Club Access",
+                plan2_2: "4 Sessioni Personal Training / mese",
+                plan2_3: "Accesso a tutti i corsi Athletic HIIT",
+                plan2_4: "Piano nutrizionale periodico",
+                plan2_5: "Parcheggio riservato",
+                plan3_title: "Black VIP",
+                plan3_1: "Personal Training illimitato one-to-one",
+                plan3_2: "Nutrizionista e Osteopata dedicato",
+                plan3_3: "Accesso illimitato Cryo & Spa Lounge",
+                plan3_4: "Servizio lavanderia kit sportivo",
+                featured_label: "Più Richiesto",
+                per_month: "/mese",
+                choose_plan: "Scegli Piano",
+                test_tag: "Testimonianze",
+                test_title: "Cosa Dicono i Nostri <span>Atleti</span>",
+                test_desc: "Esperienze autentiche di chi ha trasformato le proprie prestazioni nel nostro club.",
+                t1_text: "\"Ambiente di livello assoluto. Macchinari Biostrength incredibili e trainer che sanno esattamente come farti esprimere il massimo potenziale.\"",
+                t1_role: "Imprenditore – Milano",
+                t2_text: "\"La cura dei dettagli, dalla pulizia maniacale alla SPA post-allenamento, rende Iron Lab la miglior palestra di Milano senza paragoni.\"",
+                t2_role: "Fashion Director",
+                t3_text: "\"Il programma combinato con nutrizionista e personal trainer mi ha permesso di raggiungere una forma fisica che non credevo possibile a 40 anni.\"",
+                t3_role: "Consulente Finanziario",
+                form_tag: "Inizia la Trasformazione",
+                form_title: "Prenota la Tua Sessione di Prova <span>VIP</span>",
+                form_desc: "Compila il modulo per riservare un pass giornaliero gratuito con consulenza biometrica e tour della struttura con un nostro Head Coach.",
+                lbl_name: "Nome",
+                lbl_surname: "Cognome",
+                lbl_email: "Email",
+                lbl_phone: "Telefono",
+                lbl_goal: "Obiettivo Principale",
+                btn_submit: "Richiedi Pass Giornaliero",
+                opt_0: "Seleziona obiettivo...",
+                opt_1: "Ipertrofia & Forza Massimale",
+                opt_2: "Dimagrimento & Tonificazione",
+                opt_3: "Condizionamento Atletico",
+                opt_4: "Recovery & Benessere Generale",
+                foot_desc: "Il performance club di riferimento per chi esige il massimo dal proprio potenziale fisico.",
+                foot_loc: "Sede Milano",
+                foot_contact: "Contatti",
+                foot_hours: "Orari di Apertura",
+                hours_val: "Membri: H24 / 7 Giorni su 7<br>Concierge: Lun–Ven 07:00 – 22:00",
+                copyright_text: "© 2026 Iron Lab Milano. Tutti i diritti riservati. Progetto realizzato per portfolio."
+            },
+            en: {
+                nav_home: "Home",
+                nav_programs: "Programs",
+                nav_club: "The Club",
+                nav_pricing: "Membership",
+                nav_cta: "Free Pass",
+                hero_tag: "Milan Porta Nuova – Performance Club",
+                hero_title: "Forge Your <span>Power</span>",
+                hero_desc: "Elite Technogym Biostrength equipment, one-to-one coaching, and an exclusive atmosphere in Milan built to transcend limitations.",
+                hero_btn1: "Request Trial Pass",
+                hero_btn2: "Explore Programs",
+                stat_sqm: "Sqm of Prime Space",
+                stat_coaches: "Certified Master Coaches",
+                stat_rate: "% Success Rate",
+                stat_hours: "24/7 Access & VIP Concierge",
+                prog_tag: "Training Pathways",
+                prog_title: "High-Performance <span>Programs</span>",
+                prog_desc: "Scientific training protocols engineered for athletes, executives, and fitness enthusiasts.",
+                p1_title: "Elite Personal Training",
+                p1_desc: "One-to-one sessions featuring biomechanical motion analysis, real-time biometric metrics, and tailored periodization.",
+                p2_title: "Athletic Conditioning",
+                p2_desc: "High-Intensity Interval Training focused on explosive power, anaerobic endurance, and athletic conditioning.",
+                p3_title: "Nutrition & Biohacking",
+                p3_desc: "Advanced nutrition protocols and targeted supplementation designed by registered sports dietitians.",
+                p4_title: "Powerlifting & Strength",
+                p4_desc: "Competition-grade Eleiko platforms, calibrated plates, and specialized strength coaching.",
+                p5_title: "Recovery & Cryo Lounge",
+                p5_desc: "Finnish sauna, whole-body cryotherapy, and mobility sessions to optimize neuromuscular recovery.",
+                p6_title: "Cardio Endurance Lab",
+                p6_desc: "Skillrun, Skillrow, and real-time heart rate telemetry to boost anaerobic threshold and VO2 Max.",
+                learn_more: "Book Session →",
+                about_tag: "The Iron Lab Standard",
+                about_title: "The Science of Training in the Heart of <span>Milan</span>",
+                about_p1: "Iron Lab redefines luxury fitness in Italy. Covering over 1,200 square meters in Milan's innovation hub, we deliver an elite performance environment tailored for those who demand excellence.",
+                about_p2: "Featuring AI-driven Technogym Biostrength machinery, executive marble and wood locker rooms with sensorial rain showers, and an artisanal protein lounge.",
+                feat_1: "Technogym Artis & Eleiko",
+                feat_2: "24/7 Private Access",
+                feat_3: "Executive Spa & Sauna",
+                feat_4: "Private Valet Parking",
+                price_tag: "Plans & Memberships",
+                price_title: "Choose Your <span>Membership</span>",
+                price_desc: "No hidden charges. Unrestricted access to premier fitness amenities tailored to your goals.",
+                plan1_title: "Club Access",
+                plan1_1: "24/7 full gym floor access",
+                plan1_2: "Executive Locker Room & Sauna",
+                plan1_3: "BIA Body Composition Assessment",
+                plan1_4: "Iron Lab workout tracking app",
+                plan2_title: "Performance Pro",
+                plan2_1: "All Club Access privileges",
+                plan2_2: "4 Personal Training sessions / month",
+                plan2_3: "Unlimited Athletic HIIT classes",
+                plan2_4: "Periodic nutrition consultations",
+                plan2_5: "Reserved club parking",
+                plan3_title: "Black VIP",
+                plan3_1: "Unlimited 1-on-1 Personal Training",
+                plan3_2: "Dedicated Dietitian & Osteopath",
+                plan3_3: "Unlimited Cryo & Spa Lounge access",
+                plan3_4: "Complimentary workout kit laundry",
+                featured_label: "Most Popular",
+                per_month: "/month",
+                choose_plan: "Select Plan",
+                test_tag: "Member Reviews",
+                test_title: "What Our <span>Athletes</span> Say",
+                test_desc: "Real transformation stories from members training at our Milan performance club.",
+                t1_text: "\"A top-tier facility in every respect. Incredible Biostrength machinery and coaches who know precisely how to unlock your maximum physical output.\"",
+                t1_role: "Entrepreneur – Milan",
+                t2_text: "\"The attention to detail, from immaculate cleanliness to the post-workout SPA, makes Iron Lab without question the best club in Milan.\"",
+                t2_role: "Fashion Director",
+                t3_text: "\"The bespoke coaching paired with the in-house sports nutrition team helped me achieve physical condition I didn't think possible at 40.\"",
+                t3_role: "Financial Consultant",
+                form_tag: "Start Your Journey",
+                form_title: "Book Your <span>VIP</span> Guest Session",
+                form_desc: "Submit your details to reserve a complimentary 1-day pass complete with a biometric evaluation and a private facility tour with a Head Coach.",
+                lbl_name: "First Name",
+                lbl_surname: "Last Name",
+                lbl_email: "Email",
+                lbl_phone: "Phone Number",
+                lbl_goal: "Primary Focus",
+                btn_submit: "Claim Day Pass",
+                opt_0: "Select goal...",
+                opt_1: "Hypertrophy & Max Strength",
+                opt_2: "Fat Loss & Conditioning",
+                opt_3: "Athletic Performance",
+                opt_4: "Recovery & Total Wellness",
+                foot_desc: "Milan's premier performance club for those committed to maximizing their physical capacity.",
+                foot_loc: "Milan Location",
+                foot_contact: "Contact",
+                foot_hours: "Opening Hours",
+                hours_val: "Members: 24/7 All Year Round<br>Concierge: Mon–Fri 07:00 – 22:00",
+                copyright_text: "© 2026 Iron Lab Milan. All rights reserved. Portfolio demonstration site."
+            }
+        };
+
+        let currentLang = localStorage.getItem('ironlab_lang') || 'it';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('ironlab_lang', lang);
+            document.documentElement.lang = lang;
+
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+            });
+
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+
+            if (lang === 'en') {
+                document.getElementById('inp_name').placeholder = 'Alexander';
+                document.getElementById('inp_surname').placeholder = 'Smith';
+            } else {
+                document.getElementById('inp_name').placeholder = 'Alessandro';
+                document.getElementById('inp_surname').placeholder = 'Moretti';
+            }
+        }
+
+        setLanguage(currentLang);
+
+        // Navbar Scroll & Mobile Menu Toggle
+        const navbar = document.getElementById('navbar');
         const hamburger = document.getElementById('hamburger');
         const navLinks = document.getElementById('navLinks');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 40) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
 
         hamburger.addEventListener('click', () => {
             navLinks.classList.toggle('active');
         });
 
         document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-            });
+            link.addEventListener('click', () => navLinks.classList.remove('active'));
         });
 
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) target.scrollIntoView({ behavior: 'smooth' });
+        // Numerical Counters Animation
+        const stats = document.querySelectorAll('.stat-number');
+        let hasCounted = false;
+
+        function startCounters() {
+            stats.forEach(stat => {
+                const target = +stat.getAttribute('data-target');
+                let count = 0;
+                const speed = target / 40;
+
+                const updateCount = () => {
+                    count += speed;
+                    if (count < target) {
+                        stat.innerText = Math.ceil(count) + (target === 99 ? '%' : (target === 24 ? '/7' : '+'));
+                        setTimeout(updateCount, 25);
+                    } else {
+                        stat.innerText = target + (target === 99 ? '%' : (target === 24 ? '/7' : '+'));
+                    }
+                };
+                updateCount();
+            });
+        }
+
+        // Intersection Observer for Reveal Elements and Stats Counter
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    if (!hasCounted && entry.target.classList.contains('stats-bar')) {
+                        startCounters();
+                        hasCounted = true;
+                    }
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.reveal, .stats-bar').forEach(el => observer.observe(el));
+
+        // Interactive Mouse Spotlight for Program Cards
+        document.querySelectorAll('.program-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
             });
         });
     </script>
-
 </body>
 </html>
