@@ -3,637 +3,965 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Al Dente — Menu Creativo</title>
+    <title>Menu Editoriale & Carta dei Vini · Osteria Contemporanea</title>
+    
+    <!-- Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+    <style>
         :root {
-            --paper: #F7F5F0;
-            --ink: #1A1A1A;
-            --olive: #5B6236;
-            --olive-light: #7A8250;
-            --terracotta: #C4704B;
-            --cream: #EDE8DF;
-            --stone: #C4BDB0;
+            /* Palette: Tuscan Wine, Warm Ochre, Olive & Parchment */
+            --bg-canvas: #EDE8DE;
+            --bg-sheet: #FAF7F2;
+            --bg-card: #FFFFFF;
+            --wine-red: #6B1D2F;
+            --wine-deep: #4A121F;
+            --gold-accent: #C5A059;
+            --gold-light: #E6D5B8;
+            --gold-border: rgba(197, 160, 89, 0.4);
+            --olive-green: #3F4A3C;
+            --ink-main: #1C1917;
+            --ink-muted: #666059;
+            --border-line: rgba(28, 25, 23, 0.12);
+            
+            --font-serif-display: 'Playfair Display', Georgia, serif;
+            --font-serif-text: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            --radius-sm: 3px;
+            --ease-luxury: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Space Grotesk', sans-serif;
-            background: #e5e1d8;
-            color: var(--ink);
-            padding: 2rem 1rem;
-            line-height: 1.5;
+            background-color: var(--bg-canvas);
+            color: var(--ink-main);
+            font-family: var(--font-sans);
+            font-weight: 300;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            padding-bottom: 5rem;
         }
 
-        .menu-page {
-            width: 210mm;
-            max-width: 210mm;
-            min-height: 297mm;
+        /* -------------------------------------------------------------
+           STICKY TOOLBAR (Interactive Filter & Print Tools)
+        ------------------------------------------------------------- */
+        .menu-toolbar {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(237, 232, 222, 0.94);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border-line);
+            z-index: 1000;
+            padding: 0.85rem 5%;
+        }
+
+        .toolbar-container {
+            max-width: 1160px;
             margin: 0 auto;
-            background: var(--paper);
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
-        }
-
-        /* === DECORATIVE GRAPHICS === */
-        .deco-circle {
-            position: absolute;
-            border-radius: 50%;
-            z-index: 0;
-        }
-
-        .c1 {
-            width: 300px; height: 300px;
-            background: var(--cream);
-            top: -80px; right: -80px;
-            opacity: 0.6;
-        }
-
-        .c2 {
-            width: 180px; height: 180px;
-            border: 2px solid var(--stone);
-            bottom: 120px; left: -60px;
-            opacity: 0.4;
-        }
-
-        .c3 {
-            width: 60px; height: 60px;
-            background: var(--terracotta);
-            top: 200px; right: 60px;
-            opacity: 0.15;
-        }
-
-        .deco-line {
-            position: absolute;
-            z-index: 0;
-        }
-
-        .line-1 {
-            width: 1px; height: 400px;
-            background: linear-gradient(to bottom, transparent, var(--stone), transparent);
-            left: 50%; top: 100px;
-        }
-
-        .line-2 {
-            width: 120px; height: 1px;
-            background: var(--terracotta);
-            top: 85px; left: 50%;
-            transform: translateX(-50%);
-            opacity: 0.6;
-        }
-
-        .leaf {
-            position: absolute;
-            width: 40px; height: 40px;
-            background: var(--olive);
-            border-radius: 0 50% 0 50%;
-            opacity: 0.1;
-            transform: rotate(-45deg);
-        }
-
-        .leaf-1 { top: 400px; left: 40px; }
-        .leaf-2 { bottom: 300px; right: 50px; transform: rotate(135deg); }
-
-        .pizza-slice {
-            position: absolute;
-            width: 0; height: 0;
-            border-left: 25px solid transparent;
-            border-right: 25px solid transparent;
-            border-top: 45px solid var(--terracotta);
-            opacity: 0.08;
-            top: 680px; right: 80px;
-            transform: rotate(15deg);
-        }
-
-        /* === HEADER === */
-        .menu-header {
-            position: relative;
-            z-index: 1;
-            padding: 50px 50px 30px;
-            display: grid;
-            grid-template-columns: 1fr auto;
-            align-items: end;
-            gap: 2rem;
-            border-bottom: 1px solid var(--stone);
-            margin: 0 50px;
-        }
-
-        .header-text h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.2rem;
-            font-weight: 700;
-            color: var(--ink);
-            line-height: 1;
-            margin-bottom: 0.5rem;
-            letter-spacing: -1px;
-        }
-
-        .header-text .sub {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            color: var(--olive);
-            font-weight: 600;
-        }
-
-        .header-meta {
-            text-align: right;
-            font-size: 0.8rem;
-            color: var(--stone);
-            line-height: 1.8;
-        }
-
-        .header-meta strong {
-            color: var(--ink);
-            font-weight: 600;
-        }
-
-        /* === GRID LAYOUT === */
-        .menu-body {
-            position: relative;
-            z-index: 1;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0;
-            padding: 30px 50px 50px;
-        }
-
-        .col {
-            padding: 0 20px;
-        }
-
-        .col:first-child {
-            border-right: 1px solid var(--cream);
-        }
-
-        /* === SECTION STYLING === */
-        .section {
-            margin-bottom: 2.5rem;
-        }
-
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.6rem;
-            font-weight: 600;
-            color: var(--olive);
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .section-title::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: linear-gradient(to right, var(--stone), transparent);
-        }
-
-        .item {
-            margin-bottom: 1.3rem;
-            position: relative;
-            padding-left: 0;
-        }
-
-        .item-header {
             display: flex;
             justify-content: space-between;
-            align-items: baseline;
+            align-items: center;
+            flex-wrap: wrap;
             gap: 1rem;
-            margin-bottom: 0.3rem;
         }
 
-        .item-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.15rem;
+        .filter-nav {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 2px;
+        }
+
+        .filter-pill {
+            background: transparent;
+            border: 1px solid rgba(28, 25, 23, 0.25);
+            padding: 0.4rem 1rem;
+            font-size: 0.74rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             font-weight: 600;
-            color: var(--ink);
-        }
-
-        .item-price {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: 1rem;
-            color: var(--terracotta);
+            color: var(--ink-muted);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.25s var(--ease-luxury);
             white-space: nowrap;
         }
 
-        .item-desc {
-            font-size: 0.8rem;
-            color: var(--stone);
-            font-weight: 400;
-            line-height: 1.4;
-            max-width: 90%;
+        .filter-pill:hover, .filter-pill.active {
+            background: var(--wine-red);
+            border-color: var(--wine-red);
+            color: #FFFFFF;
+            box-shadow: 0 4px 12px rgba(107, 29, 47, 0.25);
         }
 
-        .item-tag {
-            display: inline-block;
-            font-size: 0.6rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            padding: 2px 8px;
-            border-radius: 4px;
-            margin-top: 0.4rem;
-            font-weight: 700;
-        }
-
-        .tag-veg {
-            background: #E8F5E9;
-            color: #2E7D32;
-        }
-
-        .tag-spicy {
-            background: #FFF3E0;
-            color: #E65100;
-        }
-
-        .tag-chef {
-            background: var(--ink);
-            color: var(--paper);
-        }
-
-        /* === PIZZA SECTION (SPECIAL) === */
-        .pizza-section {
-            grid-column: 1 / -1;
-            margin-bottom: 2.5rem;
-            padding-top: 1rem;
-        }
-
-        .pizza-section .section-title {
-            color: var(--olive);
-            font-size: 1.6rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .pizza-section .section-title::after {
-            background: linear-gradient(to right, var(--stone), transparent);
-        }
-
-        .pizza-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.3rem 3rem;
-        }
-
-        .pizza-item {
-            margin-bottom: 1.3rem;
-        }
-
-        .pizza-item .item-name {
-            color: var(--ink);
-            font-size: 1.15rem;
-            font-family: 'Playfair Display', serif;
-            font-weight: 600;
-        }
-
-        .pizza-item .item-price {
-            color: var(--terracotta);
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: 1rem;
-        }
-
-        .pizza-item .item-desc {
-            color: var(--stone);
-            font-size: 0.8rem;
-        }
-
-        /* === FOOTER === */
-
-        .print-btn {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            padding: 1rem 2.5rem;
-            background: var(--ink);
-            color: var(--paper);
-            border: none;
-            border-radius: 50px;
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            z-index: 1000;
-            font-size: 1rem;
-            letter-spacing: 0.5px;
-        }
-
-        .print-btn:hover {
-            background: var(--terracotta);
-        }
-
-        /* === PRINT === */
-        /* === NEW FOOTER === */
-        .menu-footer {
-            margin: 0 50px;
-            padding: 30px 0;
-            border-top: 1px solid var(--stone);
-            overflow: hidden;
-        }
-
-        .footer-left {
-            float: left;
-            width: 75%;
-            font-size: 0.85rem;
-            color: var(--stone);
-            line-height: 1.6;
-        }
-
-        .footer-left strong {
-            color: var(--ink);
-            font-weight: 600;
-        }
-
-        .footer-right {
-            float: right;
-            width: 20%;
-            text-align: right;
-        }
-
-        .qr-box {
+        .btn-action-print {
             display: inline-flex;
-            flex-direction: column;
             align-items: center;
-            gap: 0.5rem;
+            gap: 8px;
+            background: var(--wine-red);
+            color: #FFFFFF;
+            border: 1px solid var(--wine-red);
+            padding: 0.45rem 1.2rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            font-weight: 600;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.25s ease;
         }
 
-        .qr-placeholder {
-            width: 70px;
-            height: 70px;
-            border: 2px dashed var(--stone);
-            border-radius: 10px;
+        .btn-action-print:hover {
+            background: var(--wine-deep);
+            border-color: var(--wine-deep);
+            transform: translateY(-1px);
+        }
+
+        /* -------------------------------------------------------------
+           EDITORIAL MENU SHEET CONTAINER
+        ------------------------------------------------------------- */
+        .sheet-container {
+            max-width: 1140px;
+            margin: 3.5rem auto 0;
+            padding: 0 1.5rem;
+        }
+
+        .editorial-sheet {
+            background: var(--bg-sheet);
+            border: 1px solid var(--border-line);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.08);
+            padding: 4.5rem;
+            position: relative;
+            background-image: 
+                radial-gradient(#d3cbbe 0.75px, transparent 0.75px), 
+                radial-gradient(#d3cbbe 0.75px, var(--bg-sheet) 0.75px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+        }
+
+        /* Double Ornamental Border */
+        .ornamental-frame {
+            border: 1px solid var(--gold-border);
+            padding: 3rem 2.8rem;
+            position: relative;
+            background: rgba(250, 247, 242, 0.88);
+        }
+
+        /* -------------------------------------------------------------
+           MASTHEAD WITH EMBLEMS & STAMPS
+        ------------------------------------------------------------- */
+        .masthead {
+            text-align: center;
+            position: relative;
+            padding-bottom: 2.8rem;
+            margin-bottom: 3.5rem;
+            border-bottom: 2px solid var(--ink-main);
+        }
+
+        .crest-icon {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.65rem;
-            color: var(--stone);
-            text-align: center;
-            line-height: 1.2;
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 0.8rem;
+            color: var(--gold-accent);
         }
 
-        .qr-box span {
-            font-size: 0.8rem;
-            color: var(--stone);
+        .tag-est {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--wine-red);
+            font-weight: 700;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+
+        .brand-name {
+            font-family: var(--font-serif-display);
+            font-size: clamp(3rem, 5.5vw, 4.6rem);
+            font-weight: 500;
+            line-height: 1;
+            letter-spacing: 1px;
+            color: var(--ink-main);
+            margin-bottom: 0.8rem;
+        }
+
+        .brand-sub {
+            font-family: var(--font-serif-text);
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--ink-muted);
+            margin-bottom: 1.2rem;
+        }
+
+        .masthead-meta-strip {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            font-size: 0.78rem;
+            color: var(--ink-main);
+            text-transform: uppercase;
+            letter-spacing: 1.8px;
+            font-weight: 600;
+        }
+
+        .masthead-meta-strip span::after {
+            content: "✦";
+            margin-left: 2rem;
+            color: var(--gold-accent);
+        }
+        .masthead-meta-strip span:last-child::after {
+            content: "";
+            margin-left: 0;
+        }
+
+        /* -------------------------------------------------------------
+           PERCORSO DEGUSTAZIONE (CHEF'S TASTING BANNER)
+        ------------------------------------------------------------- */
+        .tasting-banner {
+            background: linear-gradient(135deg, var(--wine-red) 0%, var(--wine-deep) 100%);
+            color: #FFFFFF;
+            border-radius: var(--radius-sm);
+            padding: 2.2rem 2.5rem;
+            margin-bottom: 3.5rem;
+            box-shadow: 0 15px 35px rgba(107, 29, 47, 0.2);
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 2rem;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(197, 160, 89, 0.4);
+        }
+
+        .tasting-banner::before {
+            content: "ESPERIENZA DELLO CHEF";
+            position: absolute;
+            top: 12px;
+            right: 15px;
+            font-size: 0.62rem;
+            letter-spacing: 2px;
+            font-weight: 700;
+            color: var(--gold-light);
+            background: rgba(0,0,0,0.25);
+            padding: 3px 8px;
+            border-radius: 2px;
+        }
+
+        .tasting-title {
+            font-family: var(--font-serif-display);
+            font-size: 1.85rem;
+            color: #FFFFFF;
+            margin-bottom: 0.5rem;
+        }
+
+        .tasting-desc {
+            color: var(--gold-light);
+            font-size: 0.92rem;
+            line-height: 1.5;
+        }
+
+        .tasting-price-box {
+            text-align: right;
+            border-left: 1px solid rgba(255, 255, 255, 0.15);
+            padding-left: 2rem;
+        }
+
+        .tasting-price {
+            font-family: var(--font-serif-display);
+            font-size: 2.4rem;
+            color: #FFFFFF;
+            font-weight: 600;
+            line-height: 1;
+        }
+
+        .tasting-wine-opt {
+            font-size: 0.78rem;
+            color: var(--gold-light);
+            margin-top: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        /* -------------------------------------------------------------
+           GRID LAYOUT & SECTION HEADERS
+        ------------------------------------------------------------- */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3.8rem 3.5rem;
+        }
+
+        .section-header-block {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            border-bottom: 1.5px solid var(--ink-main);
+            padding-bottom: 0.6rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-family: var(--font-serif-display);
+            font-size: 1.95rem;
+            font-weight: 600;
+            color: var(--ink-main);
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-note {
+            font-size: 0.72rem;
+            color: var(--wine-red);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 700;
+        }
+
+        /* -------------------------------------------------------------
+           DISH ITEM ARCHITECTURE
+        ------------------------------------------------------------- */
+        .dishes-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .dish-card {
+            display: flex;
+            flex-direction: column;
+            transition: opacity 0.3s ease;
+        }
+
+        .dish-card.dimmed {
+            opacity: 0.15;
+        }
+
+        .dish-primary-row {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .dish-title {
+            font-family: var(--font-serif-text);
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--ink-main);
+            letter-spacing: 0.2px;
+        }
+
+        .dish-dots {
+            flex-grow: 1;
+            border-bottom: 1px dotted rgba(28, 25, 23, 0.3);
+            margin: 0 0.5rem;
+            min-width: 20px;
+        }
+
+        .dish-cost {
+            font-family: var(--font-serif-text);
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--wine-red);
             white-space: nowrap;
         }
 
+        .dish-desc {
+            font-size: 0.88rem;
+            color: var(--ink-muted);
+            line-height: 1.55;
+            margin-bottom: 0.5rem;
+        }
+
+        .dish-pairing {
+            background: rgba(197, 160, 89, 0.08);
+            border-left: 2px solid var(--gold-accent);
+            padding: 4px 10px;
+            font-size: 0.75rem;
+            color: var(--wine-deep);
+            font-style: italic;
+            margin-bottom: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .dish-badges {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 2px;
+        }
+
+        .badge-slowfood {
+            background: rgba(107, 29, 47, 0.12);
+            color: var(--wine-red);
+            border: 1px solid rgba(107, 29, 47, 0.25);
+        }
+
+        .badge-veg {
+            background: rgba(63, 74, 60, 0.12);
+            color: var(--olive-green);
+            border: 1px solid rgba(63, 74, 60, 0.25);
+        }
+
+        .badge-gf {
+            background: rgba(197, 160, 89, 0.15);
+            color: #7A5B20;
+            border: 1px solid rgba(197, 160, 89, 0.35);
+        }
+
+        .allergen-tag {
+            font-size: 0.68rem;
+            color: #8C8479;
+            margin-left: auto;
+        }
+
+        /* -------------------------------------------------------------
+           SPECIAL FULL-WIDTH BOX: FORNO A LEGNA & PIZZE D'AUTORE
+        ------------------------------------------------------------- */
+        .forno-spotlight {
+            grid-column: 1 / -1;
+            background: #F2EDE4;
+            border: 1px solid var(--gold-accent);
+            border-radius: var(--radius-sm);
+            padding: 3rem 2.8rem;
+            position: relative;
+            margin-top: 1rem;
+        }
+
+        .forno-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            border-bottom: 1.5px solid var(--ink-main);
+            padding-bottom: 0.8rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .forno-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem 3.5rem;
+        }
+
+        /* -------------------------------------------------------------
+           FOOTER & TRANSPARENCY
+        ------------------------------------------------------------- */
+        .menu-footer-block {
+            margin-top: 4.5rem;
+            padding-top: 2.2rem;
+            border-top: 1px solid var(--border-line);
+            font-size: 0.74rem;
+            color: var(--ink-muted);
+            line-height: 1.6;
+        }
+
+        .footer-note-title {
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--ink-main);
+            margin-bottom: 0.3rem;
+        }
+
+        .coperto-bar {
+            margin-top: 1.2rem;
+            padding: 0.8rem 1.2rem;
+            background: #EFEBE2;
+            border-radius: 2px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-weight: 600;
+            color: var(--ink-main);
+        }
+
+        /* -------------------------------------------------------------
+           PRINT-READY MEDIA QUERY (A4 Optimized)
+        ------------------------------------------------------------- */
         @media print {
+            @page {
+                size: A4 portrait;
+                margin: 10mm 12mm;
+            }
+
             body {
-                background: white;
+                background: #FFFFFF !important;
+                padding-bottom: 0;
+            }
+
+            .menu-toolbar {
+                display: none !important;
+            }
+
+            .sheet-container {
+                max-width: 100%;
+                margin: 0;
                 padding: 0;
             }
-            .menu-page {
+
+            .editorial-sheet {
+                border: none;
                 box-shadow: none;
-                width: 100%;
+                padding: 0;
+                background: #FFFFFF !important;
             }
-            .print-btn {
-                display: none;
+
+            .ornamental-frame {
+                border: 1px solid #000;
+                padding: 1.5rem;
+                background: #FFFFFF !important;
             }
-            .deco-circle, .leaf, .pizza-slice {
-                opacity: 0.06 !important;
+
+            .tasting-banner {
+                background: #F4EFEA !important;
+                color: #000000 !important;
+                border: 1px solid #000;
+                box-shadow: none;
+            }
+
+            .tasting-banner h2, .tasting-price {
+                color: #6B1D2F !important;
+            }
+
+            .tasting-desc, .tasting-wine-opt {
+                color: #444 !important;
+            }
+
+            .forno-spotlight {
+                background: #FAF7F2 !important;
+                border: 1px solid #666;
+            }
+
+            .dish-card.dimmed {
+                opacity: 1 !important;
             }
         }
 
-        @media (max-width: 768px) {
-            .menu-body {
+        /* -------------------------------------------------------------
+           RESPONSIVE BREAKPOINTS
+        ------------------------------------------------------------- */
+        @media (max-width: 900px) {
+            .editorial-sheet {
+                padding: 2.5rem 1.5rem;
+            }
+
+            .ornamental-frame {
+                padding: 2rem 1.2rem;
+            }
+
+            .tasting-banner {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
-            .col:first-child {
-                border-right: none;
-                border-bottom: 1px solid var(--cream);
-                padding-bottom: 2rem;
-                margin-bottom: 2rem;
+
+            .tasting-price-box {
+                text-align: left;
+                border-left: none;
+                padding-left: 0;
+                border-top: 1px solid rgba(255, 255, 255, 0.15);
+                padding-top: 1rem;
             }
-            .pizza-grid {
+
+            .menu-grid, .forno-grid {
                 grid-template-columns: 1fr;
+                gap: 2.5rem;
             }
-            .menu-header {
-                grid-template-columns: 1fr;
-                text-align: center;
+
+            .masthead-meta-strip {
+                flex-direction: column;
+                gap: 0.3rem;
             }
-            .header-meta {
-                text-align: center;
+
+            .masthead-meta-strip span::after {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
 
-    <div class="menu-page">
-        <!-- Decorative Graphics -->
-        <div class="deco-circle c1"></div>
-        <div class="deco-circle c2"></div>
-        <div class="deco-circle c3"></div>
-        <div class="deco-line line-1"></div>
-        <div class="deco-line line-2"></div>
-        <div class="leaf leaf-1"></div>
-        <div class="leaf leaf-2"></div>
-        <div class="pizza-slice"></div>
+    <!-- TOP INTERACTIVE TOOLBAR -->
+    <header class="menu-toolbar">
+        <div class="toolbar-container">
+            <nav class="filter-nav" aria-label="Filtro Dietetico">
+                <button class="filter-pill active" onclick="filterDiet('all')">Tutti i Piatti</button>
+                <button class="filter-pill" onclick="filterDiet('slowfood')">🏅 Presidio Slow Food</button>
+                <button class="filter-pill" onclick="filterDiet('veg')">🌿 Vegetariano</button>
+                <button class="filter-pill" onclick="filterDiet('gf')">🌾 Senza Glutine</button>
+            </nav>
 
-        <!-- Header -->
-        <div class="menu-header">
-            <div class="header-text">
-                <div class="sub">Ristorante Tradizionale</div>
-                <h1>Al Dente</h1>
-            </div>
-            <div class="header-meta">
-                <strong>Via Roma 42, Roma</strong><br>
-                +39 06 123 4567<br>
-                Lun–Dom 19:30–23:30
+            <div>
+                <button class="btn-action-print" onclick="window.print()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                    Stampa / Salva PDF (A4)
+                </button>
             </div>
         </div>
+    </header>
 
-        <!-- Body -->
-        <div class="menu-body">
-            <div class="col">
-                <div class="section">
-                    <div class="section-title">Antipasti</div>
-                    <div class="item">
-                        <div class="item-header">
-                            <span class="item-name">Tagliere di Salumi e Formaggi</span>
-                            <span class="item-price">€16</span>
-                        </div>
-                        <div class="item-desc">Prosciutto crudo di Parma, pecorino toscano stagionato, miele locale e crostini artigianali.</div>
+    <!-- EDITORIAL MENU PAPER SHEET -->
+    <main class="sheet-container">
+        <article class="editorial-sheet">
+            <div class="ornamental-frame">
+
+                <!-- MASTHEAD / CREST -->
+                <header class="masthead">
+                    <div class="crest-icon">
+                        <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
                     </div>
-                    <div class="item">
-                        <div class="item-header">
-                            <span class="item-name">Bruschetta al Pomodoro</span>
-                            <span class="item-price">€8</span>
-                        </div>
-                        <div class="item-desc">Pane casereccio tostato, pomodori freschi del nostro orto, basilico e olio evo.</div>
-                        <span class="item-tag tag-veg">Vegetariano</span>
+                    <span class="tag-est">Cucina Tipica · Forno a Legna · Cantina</span>
+                    <h1 class="brand-name">Al Dente</h1>
+                    <p class="brand-sub">Osteria Contemporanea a Milano</p>
+
+                    <div class="masthead-meta-strip">
+                        <span>Menu d'Autunno</span>
+                        <span>Filiera Corta & Presìdi</span>
+                        <span>Pane con Lievito Madre Vivo</span>
                     </div>
-                    <div class="item">
-                        <div class="item-header">
-                            <span class="item-name">Carpaccio di Manzo</span>
-                            <span class="item-price">€14</span>
-                        </div>
-                        <div class="item-desc">Fassona piemontese, rucola fresca, scaglie di parmigiano 36 mesi, olio al tartufo.</div>
-                        <span class="item-tag tag-chef">Chef</span>
+                </header>
+
+                <!-- CHEF'S TASTING MENU SPOTLIGHT -->
+                <section class="tasting-banner">
+                    <div>
+                        <h2 class="tasting-title">Percorso "Radici & Territorio"</h2>
+                        <p class="tasting-desc">Un viaggio in 5 portate curato dal nostro Chef per scoprire le eccellenze gastronomiche regionali attraverso tecniche di cottura ancestrali.</p>
                     </div>
-                    <div class="item">
-                        <div class="item-header">
-                            <span class="item-name">Burrata e Prosciutto</span>
-                            <span class="item-price">€15</span>
-                        </div>
-                        <div class="item-desc">Burrata pugliese del giorno, crudo di Parma 24 mesi, pomodorini confit.</div>
+                    <div class="tasting-price-box">
+                        <div class="tasting-price">€ 58</div>
+                        <div class="tasting-wine-opt">+ € 28 Abbinamento 4 Calici DOCG</div>
                     </div>
+                </section>
+
+                <!-- MAIN MENU GRID (2 COLUMNS) -->
+                <div class="menu-grid">
+
+                    <!-- 01. ANTIPASTI -->
+                    <section>
+                        <div class="section-header-block">
+                            <h2 class="section-title">Antipasti</h2>
+                            <span class="section-note">Dalla Terra & Dai Pascoli</span>
+                        </div>
+
+                        <div class="dishes-stack">
+                            <!-- Dish 1 -->
+                            <div class="dish-card" data-diet="slowfood gf">
+                                <div class="dish-primary-row">
+                                    <h3 class="dish-title">Battuta di Fassona al Coltello</h3>
+                                    <div class="dish-dots"></div>
+                                    <span class="dish-cost">€ 16,00</span>
+                                </div>
+                                <p class="dish-desc">Carne cruda di razza piemontese, tuorlo d'uovo bio marinato al sale bilanciato, capperi di Salina e cialda di Parmigiano Vacche Rosse 30 mesi.</p>
+                                <div class="dish-pairing">🍷 Abbinamento: Nebbiolo d'Alba DOC — Poderi Colla</div>
+                                <div class="dish-badges">
+                                    <span class="badge badge-slowfood">Presidio Slow Food</span>
+                                    <span class="badge badge-gf">Senza Glutine</span>
+                                    <span class="allergen-tag">Allergeni: 3, 7</span>
+                                </div>
+                            </div>
+
+                            <!-- Dish 2 -->
+                            <div class="dish-card" data-diet="veg gf">
+                                <div class="dish-primary-row">
+                                    <h3 class="dish-title">Burrata Pugliese & Fichi Caramellati</h3>
+                                    <div class="dish-dots"></div>
+                                    <span class="dish-cost">€ 14,50</span>
+                                </div>
+                                <p class="dish-desc">Burrata fresca di Andria, fichi cotti all'Aceto Balsamico Tradizionale di Modena DOP extravecchio e granella di pistacchi di Bronte tostati.</p>
+                                <div class="dish-badges">
+                                    <span class="badge badge-veg">Vegetariano</span>
+                                    <span class="badge badge-gf">Senza Glutine</span>
+                                    <span class="allergen-tag">Allergeni: 7, 8</span>
+                                </div>
+                            </div>
+
+                            <!-- Dish 3 -->
+                            <div class="dish-card" data-diet="veg">
+                                <div class="dish-primary-row">
+                                    <h3 class="dish-title">Fiore di Zucca Farcito in Pastella</h3>
+                                    <div class="dish-dots"></div>
+                                    <span class="dish-cost">€ 13,50</span>
+                                </div>
+                                <p class="dish-desc">Fiori freschi croccanti ripieni di ricotta di pecora romana DOP, timo selvatico e coulis di pomodoro datterino arrosto.</p>
+                                <div class="dish-badges">
+                                    <span class="badge badge-veg">Vegetariano</span>
+                                    <span class="allergen-tag">Allergeni: 1, 7</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 02. PRIMI PIATTI -->
+                    <section>
+                        <div class="section-header-block">
+                            <h2 class="section-title">Primi Piatti</h2>
+                            <span class="section-note">Pasta Fresca al Mattarello</span>
+                        </div>
+
+                        <div class="dishes-stack">
+                            <!-- Dish 1 -->
+                            <div class="dish-card" data-diet="slowfood">
+                                <div class="dish-primary-row">
+                                    <h3 class="dish-title">Tagliolini al Tartufo Nero Pregiato</h3>
+                                    <div class="dish-dots"></div>
+                                    <span class="dish-cost">€ 22,00</span>
+                                </div>
+                                <p class="dish-desc">Pasta fresca all'uovo (30 tuorli per kg), mantecata con burro d'alpeggio di malga e lamelle generose di tartufo nero di Norcia.</p>
+                                <div class="dish-pairing">🍷 Abbinamento: Barolo DOCG del Comune di Serralunga</div>
+                                <div class="dish-badges">
+                                    <span class="badge badge-slowfood">Specialità della Casa</span>
+                                    <span class="allergen-tag">Allergeni: 1, 3, 7</span>
+                                </div>
+                            </div>
+
+                            <!-- Dish 2 -->
+                            <div class="dish-card" data-diet="">
+                                <div class="dish-primary-row">
+                                    <h3 class="dish-title">Agnolotti del Plin al Brasato</h3>
+                                    <div class="dish-dots"></div>
+                                    <span class="dish-cost">€ 18,00</span>
+                                </div>
+                                <p class="dish-desc">Ripieno classico di tre arrosti piemontesi cotto per 14 ore, servito con il suo fondo bruno ristretto e foglie di salvia croccante.</p>
+                                <div class="dish-badges">
+                                    <span class="allergen-tag">Allergeni: 1, 3, 7, 9</span>
+                                </div>
+                            </div>
+
+                            <!-- Dish 3 -->
+                            <div class="dish-card" data-diet="veg">
+                                <div class="dish-primary-row">
+                                    <h3 class="dish-title">Spaghettone Monograno Cacio & Pepe</h3>
+                                    <div class="dish-dots"></div>
+                                    <span class="dish-cost">€ 15,00</span>
+                                </div>
+                                <p class="dish-desc">Grano duro Felicetti trafilato al bronzo, Pecorino Romano DOP Buccia Nera 24 mesi e selezione di tre pepi tostati al mortaio.</p>
+                                <div class="dish-badges">
+                                    <span class="badge badge-veg">Vegetariano</span>
+                                    <span class="allergen-tag">Allergeni: 1, 7</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 03. SECONDI PIATTI -->
+                    <section>
+                        <div class="section-header-block">
+                            <h2 class="section-title">Secondi & Brace</h2>
+                            <span class="section-note">Carni Selezionate & Pescato</span>
+                        </div>
+
+                        <div class="dishes-stack">
+                            <!-- Dish 1 -->
+                            <div class="dish-card" data-diet="gf">
+                                <div class="dish-primary-row">
+                                    <h3 class="dish-title">Tagliata di Chianina al Sale Dolce</h3>
+                                    <div class="dish-dots"></div>
+                                    <span class="dish-cost">€ 28,00</span>
+                                </div>
+                                <p class="dish-desc">Lombata di vitellone bianco dell'Appennino Centrale IGP cotta su brace di leccio, sale dolce di Cervia e patate ratte al rosmarino.</p>
+                                <div class="dish-pairing">🍷 Abbinamento: Chianti Classico Gran Selezione DOCG</div>
+                                <div class="dish-badges">
+                                    <span class="badge badge-gf">Senza Glutine</span>
+                                    <span class="allergen-tag">Allergeni: Nessuno</span>
+                                </div>
+                            </div>
+
+                            <!-- Dish 2 -->
+                            <div class="dish-card" data-diet="gf">
+                                <div class="dish-primary-row">
+                                    <h3 class="dish-title">Polpo Arrostito su Crema di Ceci</h3>
+                                    <div class="dish-dots"></div>
+                                    <span class="dish-cost">€ 24,00</span>
+                                </div>
+                                <p class="dish-desc">Tentacolo scottato alla piastra, vellutata di ceci toscani del Chianti, pomodori confit e fili di peperone crusco di Senise IGP.</p>
+                                <div class="dish-badges">
+                                    <span class="badge badge-gf">Senza Glutine</span>
+                                    <span class="allergen-tag">Allergeni: 4, 14</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 04. I DOLCI -->
+                    <section>
+                        <div class="section-header-block">
+                            <h2 class="section-title">I Dolci</h2>
+                            <span class="section-note">Fatti a Mano Ogni Mattina</span>
+                        </div>
+
+                        <div class="dishes-stack">
+                            <!-- Dish 1 -->
+                            <div class="dish-card" data-diet="veg">
+                                <div class="dish-primary-row">
+                                    <h3 class="dish-title">Tiramisù al Cucchiaio "Al Dente"</h3>
+                                    <div class="dish-dots"></div>
+                                    <span class="dish-cost">€ 8,50</span>
+                                </div>
+                                <p class="dish-desc">Savoiardi artigianali inzuppati nel nostro caffè espresso monorigine Etiopia, crema al mascarpone lodigiano e cacao Valrhona 100%.</p>
+                                <div class="dish-badges">
+                                    <span class="badge badge-veg">Vegetariano</span>
+                                    <span class="allergen-tag">Allergeni: 1, 3, 7</span>
+                                </div>
+                            </div>
+
+                            <!-- Dish 2 -->
+                            <div class="dish-card" data-diet="veg gf">
+                                <div class="dish-primary-row">
+                                    <h3 class="dish-title">Tortino Tiepido al Cioccolato Fondente</h3>
+                                    <div class="dish-dots"></div>
+                                    <span class="dish-cost">€ 9,00</span>
+                                </div>
+                                <p class="dish-desc">Cuore morbido di cioccolato fondente 72% Criollo, servito con gelato alla vaniglia Bourbon del Madagascar e scaglie di sale maldon.</p>
+                                <div class="dish-badges">
+                                    <span class="badge badge-veg">Vegetariano</span>
+                                    <span class="badge badge-gf">Senza Glutine</span>
+                                    <span class="allergen-tag">Allergeni: 3, 7, 8</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 05. FORNO A LEGNA & PIZZE (FULL WIDTH HIGHLIGHT) -->
+                    <section class="forno-spotlight">
+                        <div class="forno-header">
+                            <div>
+                                <h2 class="section-title" style="font-size: 2.2rem; color: var(--wine-red);">Le Pizze a Lunga Lievitazione</h2>
+                                <p style="font-size: 0.88rem; color: var(--ink-muted); margin-top: 4px;">Impasto con farine di tipo 1 macinate a pietra · Maturazione 72 ore · Cotte nel forno a legna di faggio</p>
+                            </div>
+                            <span class="section-note">Farine 100% Italiane</span>
+                        </div>
+
+                        <div class="forno-grid">
+                            <!-- Pizza 1 -->
+                            <div class="dish-card" data-diet="slowfood veg">
+                                <div class="dish-primary-row">
+                                    <h3 class="dish-title">Margherita Verace DOP</h3>
+                                    <div class="dish-dots"></div>
+                                    <span class="dish-cost">€ 11,50</span>
+                                </div>
+                                <p class="dish-desc">Pomodoro San Marzano DOP schiacciato a mano, Mozzarella di Bufala Campana DOP a crudo, basilico genovese e olio EVO monocultivar Taggiasca.</p>
+                                <div class="dish-badges">
+                                    <span class="badge badge-slowfood">DOP Campana</span>
+                                    <span class="badge badge-veg">Vegetariano</span>
+                                    <span class="allergen-tag">Allergeni: 1, 7</span>
+                                </div>
+                            </div>
+
+                            <!-- Pizza 2 -->
+                            <div class="dish-card" data-diet="slowfood">
+                                <div class="dish-primary-row">
+                                    <h3 class="dish-title">La Valdostana al Tartufo Estivo</h3>
+                                    <div class="dish-dots"></div>
+                                    <span class="dish-cost">€ 17,50</span>
+                                </div>
+                                <p class="dish-desc">Fior di latte di Agerola, Fontina d'Alpeggio DOP, funghi porcini della Val di Taro spadellati, prosciutto crudo di Parma 24 mesi e carpaccio di tartufo.</p>
+                                <div class="dish-badges">
+                                    <span class="badge badge-slowfood">Gourmet Selection</span>
+                                    <span class="allergen-tag">Allergeni: 1, 7</span>
+                                </div>
+                            </div>
+
+                            <!-- Pizza 3 -->
+                            <div class="dish-card" data-diet="">
+                                <div class="dish-primary-row">
+                                    <h3 class="dish-title">'Nduja di Spilinga & Stracciatella</h3>
+                                    <div class="dish-dots"></div>
+                                    <span class="dish-cost">€ 14,00</span>
+                                </div>
+                                <p class="dish-desc">Salsa di pomodoro giallo del Vesuvio, 'Nduja calabrese artigianale presidio Slow Food, stracciatella di burrata fresca e polvere di olive nere caiazzane.</p>
+                                <div class="dish-badges">
+                                    <span class="allergen-tag">Allergeni: 1, 7</span>
+                                </div>
+                            </div>
+
+                            <!-- Pizza 4 -->
+                            <div class="dish-card" data-diet="veg">
+                                <div class="dish-primary-row">
+                                    <h3 class="dish-title">Ortolana ai Carboni d'Inverno</h3>
+                                    <div class="dish-dots"></div>
+                                    <span class="dish-cost">€ 13,00</span>
+                                </div>
+                                <p class="dish-desc">Fior di latte, crema di zucca mantovana arrostita, radicchio tardivo di Treviso IGP brasato, noci tostate e scaglie di ricotta salata affumicata.</p>
+                                <div class="dish-badges">
+                                    <span class="badge badge-veg">Vegetariano</span>
+                                    <span class="allergen-tag">Allergeni: 1, 7, 8</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
                 </div>
 
-                <div class="section">
-                    <div class="section-title">Primi Piatti</div>
-                    <div class="item">
-                        <div class="item-header">
-                            <span class="item-name">Risotto allo Zafferano</span>
-                            <span class="item-price">€18</span>
-                        </div>
-                        <div class="item-desc">Carnaroli mantecato al momento, zafferano di Cascia, midollo di bue, croccante di parmigiano.</div>
+                <!-- FOOTER & ALLERGEN NOTICES -->
+                <footer class="menu-footer-block">
+                    <div class="footer-note-title">Informativa sulla Trasparenza & Allergeni Alimentari (Reg. UE 1169/2011)</div>
+                    <p>Gentile ospite, le nostre preparazioni possono contenere tracce di glutine, uova, lattosio, frutta a guscio, sedano e solfiti. Per qualsiasi informazione specifica su intolleranze, vi preghiamo di rivolgervi al personale di sala che fornirà il registro allergeni certificato.</p>
+                    
+                    <div class="coperto-bar">
+                        <span>Servizio & Cestino del pane artigianale con olio EVO: € 3,00</span>
+                        <span>Acqua minerale microfiltrata Valverde 0.75L: € 3,00 | Caffè espresso biologico: € 2,00</span>
                     </div>
-                    <div class="item">
-                        <div class="item-header">
-                            <span class="item-name">Tagliatelle al Ragù</span>
-                            <span class="item-price">€14</span>
-                        </div>
-                        <div class="item-desc">Pasta fresca fatta in casa ogni mattina, ragù di manzo brasato 6 ore.</div>
-                        <span class="item-tag tag-chef">Della Casa</span>
-                    </div>
-                    <div class="item">
-                        <div class="item-header">
-                            <span class="item-name">Gnocchi alla Sorrentina</span>
-                            <span class="item-price">€13</span>
-                        </div>
-                        <div class="item-desc">Pomodoro San Marzano, mozzarella di bufala campana, basilico fresco.</div>
-                        <span class="item-tag tag-veg">Vegetariano</span>
-                    </div>
-                </div>
+                </footer>
+
             </div>
+        </article>
+    </main>
 
-            <div class="col">
-                <div class="section">
-                    <div class="section-title">Secondi</div>
-                    <div class="item">
-                        <div class="item-header">
-                            <span class="item-name">Filetto di Branzino</span>
-                            <span class="item-price">€22</span>
-                        </div>
-                        <div class="item-desc">Cotto al vapore con erbe aromatiche, crema di patate al limone, verdure di stagione.</div>
-                    </div>
-                    <div class="item">
-                        <div class="item-header">
-                            <span class="item-name">Bistecca alla Fiorentina</span>
-                            <span class="item-price">€32</span>
-                        </div>
-                        <div class="item-desc">Chianina IGP da 800g, cotta sulla brace di legna di rovere, servita con fagioli all'olio.</div>
-                        <span class="item-tag tag-chef">Chef</span>
-                    </div>
-                    <div class="item">
-                        <div class="item-header">
-                            <span class="item-name">Ossobuco alla Milanese</span>
-                            <span class="item-price">€24</span>
-                        </div>
-                        <div class="item-desc">Risotto allo zafferano, gremolata fresca, riduzione di vino rosso.</div>
-                    </div>
-                </div>
+    <!-- INTERACTIVE FILTER LOGIC -->
+    <script>
+        function filterDiet(type) {
+            // Update button UI
+            document.querySelectorAll('.filter-pill').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
 
-                <div class="section">
-                    <div class="section-title">Dolci</div>
-                    <div class="item">
-                        <div class="item-header">
-                            <span class="item-name">Tiramisù della Casa</span>
-                            <span class="item-price">€8</span>
-                        </div>
-                        <div class="item-desc">La ricetta segreta della nonna Luisa. Savoiardi, mascarpone fresco, cacao amaro.</div>
-                    </div>
-                    <div class="item">
-                        <div class="item-header">
-                            <span class="item-name">Panna Cotta ai Frutti di Bosco</span>
-                            <span class="item-price">€7</span>
-                        </div>
-                        <div class="item-desc">Composta fresca di more e lamponi, menta del nostro giardino.</div>
-                        <span class="item-tag tag-veg">Vegetariano</span>
-                    </div>
-                    <div class="item">
-                        <div class="item-header">
-                            <span class="item-name">Torta della Nonna</span>
-                            <span class="item-price">€7</span>
-                        </div>
-                        <div class="item-desc">Crema pasticcera fatta in casa, pinoli tostati, base frolla friabile.</div>
-                    </div>
-                </div>
-                        </div>
+            const dishes = document.querySelectorAll('.dish-card');
 
-            <!-- PIZZA SECTION -->
-            <div class="pizza-section">
-            <div class="pizza-deco"></div>
-            <div class="pizza-deco-2"></div>
-            <div class="section-title">La Nostra Pizza</div>
-            <div class="pizza-grid">
-                <div class="pizza-item item">
-                    <div class="item-header">
-                        <span class="item-name">Margherita DOP</span>
-                        <span class="item-price">€9</span>
-                    </div>
-                    <div class="item-desc">Pomodoro San Marzano, mozzarella di bufala, basilico, olio evo.</div>
-                    <span class="item-tag tag-veg">Classica</span>
-                </div>
-                <div class="pizza-item item">
-                    <div class="item-header">
-                        <span class="item-name">Diavola</span>
-                        <span class="item-price">€11</span>
-                    </div>
-                    <div class="item-desc">Pomodoro, mozzarella, salame piccante, olive nere, peperoncino fresco.</div>
-                    <span class="item-tag tag-spicy">Piccante</span>
-                </div>
-                <div class="pizza-item item">
-                    <div class="item-header">
-                        <span class="item-name">Quattro Stagioni</span>
-                        <span class="item-price">€12</span>
-                    </div>
-                    <div class="item-desc">Pomodoro, mozzarella, prosciutto, funghi, carciofi, olive.</div>
-                </div>
-                <div class="pizza-item item">
-                    <div class="item-header">
-                        <span class="item-name">Truffle & Burrata</span>
-                        <span class="item-price">€14</span>
-                    </div>
-                    <div class="item-desc">Crema di tartufo nero, burrata pugliese, rucola, scaglie di parmigiano.</div>
-                    <span class="item-tag tag-chef">Speciale</span>
-                </div>
-                <div class="pizza-item item">
-                    <div class="item-header">
-                        <span class="item-name">Capricciosa</span>
-                        <span class="item-price">€12</span>
-                    </div>
-                    <div class="item-desc">Pomodoro, mozzarella, prosciutto cotto, funghi, carciofi, olive.</div>
-                </div>
-                <div class="pizza-item item">
-                    <div class="item-header">
-                        <span class="item-name">Marinara</span>
-                        <span class="item-price">€7</span>
-                    </div>
-                    <div class="item-desc">Pomodoro, aglio, origano, olio evo. La regina della semplicità.</div>
-                    <span class="item-tag tag-veg">Vegana</span>
-                </div>
-            </div>
-        </div>
-    </div>  
-        <!-- Footer -->
-    <div class="menu-footer">
-        <div class="footer-left">
-            <strong>Coperto €2,50</strong> · Serviamo prodotti freschi e stagionali · Per allergie, chiedere al personale
-        </div>
-        <div class="footer-right">
-            <div class="qr-box">
-                <div class="qr-placeholder">QR CODE</div>
-                <span>Menu digitale</span>
-            </div>
-        </div>
-    </div>
-
-    <button class="print-btn" onclick="window.print()">🖨️ Stampa / Salva PDF</button>
-
+            dishes.forEach(dish => {
+                if (type === 'all') {
+                    dish.classList.remove('dimmed');
+                } else {
+                    const diets = dish.getAttribute('data-diet') || '';
+                    if (diets.includes(type)) {
+                        dish.classList.remove('dimmed');
+                    } else {
+                        dish.classList.add('dimmed');
+                    }
+                }
+            });
+        }
+    </script>
 </body>
 </html>
