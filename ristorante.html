@@ -61,7 +61,7 @@
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             z-index: 1000;
-            padding: 1.2rem 6%;
+            padding: 1rem 6%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -70,26 +70,44 @@
         }
 
         nav.scrolled {
-            padding: 0.9rem 6%;
+            padding: 0.7rem 6%;
             background: rgba(251, 248, 244, 0.98);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
         }
 
         .logo {
             font-family: var(--font-serif);
-            font-size: 1.8rem;
+            font-size: 1.85rem;
             font-weight: 700;
             color: var(--wine-primary);
             text-decoration: none;
             letter-spacing: 0.5px;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 14px;
         }
 
         .logo span {
             color: var(--gold-accent);
             font-style: italic;
+        }
+
+        /* Prominent Brand Logo */
+        .nav-logo-img {
+            height: 56px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 4px;
+            display: block;
+            transition: var(--transition);
+        }
+
+        nav.scrolled .nav-logo-img {
+            height: 46px;
+        }
+
+        .logo:hover .nav-logo-img {
+            transform: scale(1.05);
         }
 
         .nav-right {
@@ -450,7 +468,7 @@
             color: var(--gold-accent);
         }
 
-        /* Menu Section (تم تحسين التجاوب هنا) */
+        /* Menu Section */
         .menu-container {
             background: #FFFFFF;
             border-radius: 16px;
@@ -701,6 +719,15 @@
                 padding: 4.5rem 4%;
             }
 
+            .nav-logo-img {
+                height: 44px;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+                gap: 8px;
+            }
+
             .nav-links {
                 position: fixed;
                 top: 75px;
@@ -731,7 +758,6 @@
                 bottom: -20px;
             }
 
-            /* إصلاحات خاصة بالموبايل لقسم المينيو */
             .menu-container {
                 padding: 2.5rem 1.2rem;
                 border-radius: 12px;
@@ -760,7 +786,10 @@
 
     <!-- Navigation -->
     <nav id="navbar">
-        <a href="#" class="logo">Al Dente <span>.</span></a>
+        <a href="#" class="logo">
+            <img src="logo-ristorante.png" alt="Logo Al Dente" class="nav-logo-img" onerror="this.src='logo-ristorante.jpg'">
+            Al Dente <span>.</span>
+        </a>
         <div class="nav-right">
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home" data-key="nav_home">Home</a></li>
@@ -967,7 +996,10 @@
     <footer>
         <div class="footer-grid">
             <div class="footer-col">
-                <div class="logo" style="color: #FFF; margin-bottom: 1rem;">Al Dente <span>.</span></div>
+                <div class="logo" style="color: #FFF; margin-bottom: 1rem;">
+                    <img src="logo-ristorante.png" alt="Logo Al Dente" class="nav-logo-img" onerror="this.src='logo-ristorante.jpg'">
+                    Al Dente <span>.</span>
+                </div>
                 <p data-key="foot_desc">Cucina autentica italiana, vini d'eccellenza e sapori senza tempo nel cuore della città.</p>
             </div>
             <div class="footer-col">
