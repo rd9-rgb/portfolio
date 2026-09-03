@@ -164,7 +164,7 @@
         .hero {
             min-height: 100vh;
             width: 100%;
-            max-width: 100%; /* Overrides the generic section max-width */
+            max-width: 100%;
             margin: 0;
             display: flex;
             align-items: center;
@@ -314,16 +314,19 @@
 
         /* About */
         .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 5rem;
-            align-items: center;
+            display: flex;
+            flex-direction: column;
+            gap: 3.5rem;
         }
 
-        .about-text h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
+        .about-text {
+            max-width: 820px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-text .skills {
+            justify-content: center;
         }
 
         .about-text h2 em {
@@ -345,10 +348,9 @@
         .about-img img {
             width: 100%;
             height: auto;
-            border-radius: 16px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+            border-radius: 20px;
+            box-shadow: 0 30px 70px rgba(0,0,0,0.08);
             display: block;
-            object-fit: cover;
         }
 
         .skills {
@@ -1036,7 +1038,7 @@
                 </div>
             </div>
             <div class="about-img">
-                <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80" alt="Interior design workspace" loading="lazy">
+                <img src="about.jpg" alt="Rebal Dib Studio – Web & Interior Design Workspace" loading="lazy">
             </div>
         </div>
     </section>
